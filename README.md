@@ -37,6 +37,8 @@ Each case describes one scientific research chain:
 ```bash
 python3 scripts/build_dataset.py
 python3 scripts/validate_dataset.py data/processed/scievo_gold.jsonl
+python3 scripts/build_eval_tasks.py
+python3 scripts/make_quality_report.py
 ```
 
 ## MinerU Usage
@@ -45,6 +47,18 @@ The seed PDF has been parsed with the MinerU API. Normalized artifacts are store
 under `data/interim/mineru/Sci-Evo-Sample/`, with the full image dump under
 `data/interim/mineru/extracted/images/`. The processed dataset keeps evidence
 fields that can point back to these MinerU artifacts.
+
+## Expansion Pipeline
+
+Use `scripts/collect_openalex_candidates.py` to collect open-access metadata for
+future Sci-Evo cases:
+
+```bash
+python3 scripts/collect_openalex_candidates.py --limit 25
+```
+
+The script writes metadata only; it does not download PDFs. Candidate papers
+still require license review before public release or full-text processing.
 
 ## License
 

@@ -10,6 +10,8 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 DATASET = ROOT / "data" / "processed" / "scievo_gold.jsonl"
+EVAL_TASKS = ROOT / "data" / "processed" / "scievo_eval_tasks.jsonl"
+CANDIDATES = ROOT / "data" / "raw" / "candidate_papers.jsonl"
 OUT = ROOT / "reports" / "QUALITY_REPORT.md"
 
 
@@ -25,6 +27,8 @@ def load_cases(path: Path) -> list[dict]:
 
 def main() -> None:
     cases = load_cases(DATASET)
+    eval_task_count = len(load_cases(EVAL_TASKS)) if EVAL_TASKS.exists() else 0
+    candidate_count = len(load_cases(CANDIDATES)) if CANDIDATES.exists() else 0
     curation = Counter(case["quality"]["curation_level"] for case in cases)
     actions = Counter()
     domains = Counter()
@@ -44,6 +48,8 @@ def main() -> None:
         f.write("## Summary\n\n")
         f.write(f"- Cases: {len(cases)}\n")
         f.write(f"- Trajectory steps: {step_count}\n")
+        f.write(f"- Evaluation tasks: {eval_task_count}\n")
+        f.write(f"- Expansion paper candidates: {candidate_count}\n")
         f.write(f"- Average evidence items per step: {avg_evidence:.2f}\n")
         f.write("\n## Curation Levels\n\n")
         for name, count in sorted(curation.items()):

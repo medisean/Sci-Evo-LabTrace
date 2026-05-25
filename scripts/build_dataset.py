@@ -250,6 +250,8 @@ def main() -> None:
         "gold_case_count": 1,
         "silver_case_count": 0,
         "processed_file": str(OUT_JSONL.relative_to(ROOT)),
+        "eval_tasks_file": "data/processed/scievo_eval_tasks.jsonl",
+        "candidate_sources_file": "data/raw/candidate_papers.jsonl",
         "schema_file": "schemas/scievo_case.schema.json",
         "created_from": ["Sci-Evo_tool_case.json", "Sci-Evo-Sample.pdf"],
     }

@@ -19,6 +19,7 @@
 - [ ] PPT。
 - [ ] 3-5 分钟录屏。
 - [ ] 质量报告：`reports/QUALITY_REPORT.md`。
+- [ ] 评测任务：`data/processed/scievo_eval_tasks.jsonl`。
 - [ ] 扩展版 gold cases。
 - [ ] 简单 benchmark/evaluation tasks。
 
@@ -26,6 +27,7 @@
 
 - [ ] `python3 scripts/build_dataset.py` 成功。
 - [ ] `python3 scripts/validate_dataset.py data/processed/scievo_gold.jsonl` 成功。
+- [ ] `python3 scripts/build_eval_tasks.py` 成功。
 - [ ] README 中能讲清楚数据集用途。
 - [ ] 技术报告中能对应五个评分维度。
 - [ ] 不提交 `mineru-api-token.txt`。

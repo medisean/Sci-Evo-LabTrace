@@ -4,6 +4,8 @@
 
 - Cases: 1
 - Trajectory steps: 7
+- Evaluation tasks: 15
+- Expansion paper candidates: 25
 - Average evidence items per step: 1.43
 
 ## Curation Levels
