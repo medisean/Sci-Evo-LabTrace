@@ -18,6 +18,10 @@ to final verification.
   submission JSONL format.
 - `scripts/validate_dataset.py`: validates required fields and trajectory
   consistency.
+- `scripts/check_submission_readiness.py`: evaluates whether the repo is
+  actually ready to submit.
+- `scripts/vet_candidate_sources.py`: filters OA metadata into a
+  license-aware expansion queue.
 - `docs/TECHNICAL_REPORT.md`: technical report draft for submission.
 - `docs/VIDEO_SCRIPT.md`: short recording script.
 - `docs/SUBMISSION_CHECKLIST.md`: final packaging checklist.
@@ -38,8 +42,15 @@ Each case describes one scientific research chain:
 python3 scripts/build_dataset.py
 python3 scripts/validate_dataset.py data/processed/scievo_gold.jsonl
 python3 scripts/build_eval_tasks.py
+python3 scripts/vet_candidate_sources.py
 python3 scripts/make_quality_report.py
+python3 scripts/check_submission_readiness.py
 ```
+
+The readiness script returns non-zero until the submission gates are met. The
+current hard blocker is dataset scale: the seed release has only one complete
+gold case, and this repo now treats `>=3` complete gold cases as the minimum
+credible submission threshold.
 
 ## MinerU Usage
 
@@ -59,6 +70,17 @@ python3 scripts/collect_openalex_candidates.py --limit 25
 
 The script writes metadata only; it does not download PDFs. Candidate papers
 still require license review before public release or full-text processing.
+Run `scripts/vet_candidate_sources.py` after collection to prioritize only the
+papers whose license metadata is explicit enough for local MinerU parsing.
+
+## Current Status
+
+- Dataset build/validation pipeline is in place and currently produces 1 gold
+  case and 15 evaluation tasks.
+- MinerU usage is documented with local run artifacts for the seed paper.
+- Submission docs, checklist, quality report, and readiness report are present.
+- The remaining first-place blocker is expansion to multiple evidence-complete
+  gold cases from vetted open-access PDFs.
 
 ## License
 

@@ -12,6 +12,8 @@ ROOT = Path(__file__).resolve().parents[1]
 DATASET = ROOT / "data" / "processed" / "scievo_gold.jsonl"
 EVAL_TASKS = ROOT / "data" / "processed" / "scievo_eval_tasks.jsonl"
 CANDIDATES = ROOT / "data" / "raw" / "candidate_papers.jsonl"
+VETTED = ROOT / "data" / "processed" / "vetted_open_access_sources.jsonl"
+READINESS = ROOT / "reports" / "SUBMISSION_READINESS.md"
 OUT = ROOT / "reports" / "QUALITY_REPORT.md"
 
 
@@ -29,13 +31,17 @@ def main() -> None:
     cases = load_cases(DATASET)
     eval_task_count = len(load_cases(EVAL_TASKS)) if EVAL_TASKS.exists() else 0
     candidate_count = len(load_cases(CANDIDATES)) if CANDIDATES.exists() else 0
+    vetted = load_cases(VETTED) if VETTED.exists() else []
     curation = Counter(case["quality"]["curation_level"] for case in cases)
     actions = Counter()
     domains = Counter()
+    license_statuses = Counter()
+    vetting_statuses = Counter(item.get("vetting_status", "unknown") for item in vetted)
     evidence_count = 0
     step_count = 0
     for case in cases:
         domains.update(case.get("domain", []))
+        license_statuses[case.get("source", {}).get("license_status", "missing")] += 1
         for step in case.get("agent_trajectory", []):
             actions[step.get("action", "unknown")] += 1
             step_count += 1
@@ -50,7 +56,9 @@ def main() -> None:
         f.write(f"- Trajectory steps: {step_count}\n")
         f.write(f"- Evaluation tasks: {eval_task_count}\n")
         f.write(f"- Expansion paper candidates: {candidate_count}\n")
+        f.write(f"- Vetted OA sources: {len(vetted)}\n")
         f.write(f"- Average evidence items per step: {avg_evidence:.2f}\n")
+        f.write(f"- Submission readiness report: {'present' if READINESS.exists() else 'missing'}\n")
         f.write("\n## Curation Levels\n\n")
         for name, count in sorted(curation.items()):
             f.write(f"- {name}: {count}\n")
@@ -60,10 +68,17 @@ def main() -> None:
         f.write("\n## Domain Tags\n\n")
         for name, count in sorted(domains.items()):
             f.write(f"- {name}: {count}\n")
+        f.write("\n## License Statuses\n\n")
+        for name, count in sorted(license_statuses.items()):
+            f.write(f"- {name}: {count}\n")
+        f.write("\n## Vetted Source Queue\n\n")
+        for name, count in sorted(vetting_statuses.items()):
+            f.write(f"- {name}: {count}\n")
         f.write("\n## Current Risks\n\n")
         f.write("- Source license status must be reviewed before public release.\n")
-        f.write("- Current seed release should be expanded with more gold cases.\n")
+        f.write("- Current seed release should be expanded to at least 3 complete gold cases before submission.\n")
         f.write("- MinerU parsing artifacts should be attached for the formal submission.\n")
+        f.write("- Additional vetted OA PDFs still need to be downloaded and parsed locally before new gold cases can be curated.\n")
     print(f"Wrote {OUT}")
 
 

@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Build the initial Sci-Evo-LabTrace JSONL dataset."""
+"""Build the Sci-Evo-LabTrace JSONL dataset from curated case sources."""
 
 from __future__ import annotations
 
@@ -9,9 +9,14 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 SOURCE_JSON = ROOT / "Sci-Evo_tool_case.json"
+CURATED_CASES_DIR = ROOT / "data" / "curated" / "cases"
 OUT_JSONL = ROOT / "data" / "processed" / "scievo_gold.jsonl"
 OUT_PRETTY = ROOT / "data" / "processed" / "scievo_gold.pretty.json"
 OUT_MANIFEST = ROOT / "data" / "processed" / "dataset_manifest.json"
+README_FILE = ROOT / "README.md"
+TECH_REPORT = ROOT / "docs" / "TECHNICAL_REPORT.md"
+CHECKLIST = ROOT / "docs" / "SUBMISSION_CHECKLIST.md"
+VIDEO_SCRIPT = ROOT / "docs" / "VIDEO_SCRIPT.md"
 
 
 STEP_PHASES = {
@@ -146,8 +151,8 @@ def normalize_step(step: dict) -> dict:
     return out
 
 
-def build_case(source: dict) -> dict:
-    case = {
+def build_seed_case(source: dict) -> dict:
+    return {
         "case_id": "SELT-PROT-0001",
         "dataset_version": "0.1.0",
         "sci_evo_type": "scientific_evolution_trace",
@@ -231,30 +236,72 @@ def build_case(source: dict) -> dict:
             "notes": "Seed case derived from competition-provided sample files and enriched with page-level evidence pointers.",
         },
     }
-    return case
 
 
-def main() -> None:
-    source = load_source_case()
-    case = build_case(source)
-    OUT_JSONL.parent.mkdir(parents=True, exist_ok=True)
-    with OUT_JSONL.open("w", encoding="utf-8") as f:
-        f.write(json.dumps(case, ensure_ascii=False) + "\n")
-    with OUT_PRETTY.open("w", encoding="utf-8") as f:
-        json.dump([case], f, ensure_ascii=False, indent=2)
-        f.write("\n")
-    manifest = {
+def load_curated_cases() -> list[dict]:
+    if not CURATED_CASES_DIR.exists():
+        return []
+    cases = []
+    for path in sorted(CURATED_CASES_DIR.glob("*.json")):
+        with path.open("r", encoding="utf-8") as f:
+            case = json.load(f)
+        case.setdefault("quality", {})
+        notes = case["quality"].get("notes", "")
+        provenance = f"Curated source file: {path.relative_to(ROOT)}"
+        case["quality"]["notes"] = f"{notes} {provenance}".strip()
+        cases.append(case)
+    return cases
+
+
+def build_cases() -> list[dict]:
+    cases = [build_seed_case(load_source_case())]
+    cases.extend(load_curated_cases())
+    cases.sort(key=lambda item: item["case_id"])
+    return cases
+
+
+def build_manifest(cases: list[dict]) -> dict:
+    gold = sum(1 for case in cases if case["quality"]["curation_level"] == "gold")
+    silver = sum(1 for case in cases if case["quality"]["curation_level"] == "silver")
+    license_review_needed = sum(1 for case in cases if case["quality"].get("requires_license_review"))
+    mineru_cases = sum(1 for case in cases if case.get("source", {}).get("mineru_artifact"))
+    readiness = {
+        "dataset_jsonl_validated": False,
+        "minimum_complete_gold_cases": gold >= 3,
+        "mineru_usage_documented": True,
+        "docs_complete": all(path.exists() and path.stat().st_size > 0 for path in [README_FILE, TECH_REPORT, CHECKLIST, VIDEO_SCRIPT]),
+        "quality_report_expected": True,
+        "source_license_risks_explicit": True,
+        "git_clean_required_before_submission": True,
+    }
+    return {
         "dataset_name": "Sci-Evo-LabTrace",
         "version": "0.1.0",
-        "case_count": 1,
-        "gold_case_count": 1,
-        "silver_case_count": 0,
+        "case_count": len(cases),
+        "gold_case_count": gold,
+        "silver_case_count": silver,
+        "license_review_required_count": license_review_needed,
+        "cases_with_mineru_artifacts": mineru_cases,
         "processed_file": str(OUT_JSONL.relative_to(ROOT)),
         "eval_tasks_file": "data/processed/scievo_eval_tasks.jsonl",
         "candidate_sources_file": "data/raw/candidate_papers.jsonl",
+        "vetted_sources_file": "data/processed/vetted_open_access_sources.jsonl",
         "schema_file": "schemas/scievo_case.schema.json",
-        "created_from": ["Sci-Evo_tool_case.json", "Sci-Evo-Sample.pdf"],
+        "created_from": ["Sci-Evo_tool_case.json", "data/curated/cases/*.json"],
+        "readiness": readiness,
     }
+
+
+def main() -> None:
+    cases = build_cases()
+    OUT_JSONL.parent.mkdir(parents=True, exist_ok=True)
+    with OUT_JSONL.open("w", encoding="utf-8") as f:
+        for case in cases:
+            f.write(json.dumps(case, ensure_ascii=False) + "\n")
+    with OUT_PRETTY.open("w", encoding="utf-8") as f:
+        json.dump(cases, f, ensure_ascii=False, indent=2)
+        f.write("\n")
+    manifest = build_manifest(cases)
     with OUT_MANIFEST.open("w", encoding="utf-8") as f:
         json.dump(manifest, f, ensure_ascii=False, indent=2)
         f.write("\n")

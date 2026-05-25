@@ -20,8 +20,12 @@
 
 ## 5. 工程与质量控制
 
-仓库提供构建脚本和验证脚本。运行 `python3 scripts/build_dataset.py` 可以生成 JSONL 数据集，运行 `python3 scripts/validate_dataset.py data/processed/scievo_gold.jsonl` 可以检查字段完整性和轨迹一致性。
+仓库提供构建脚本、验证脚本和提交就绪检查。运行 `python3 scripts/build_dataset.py` 可以生成 JSONL 数据集，运行 `python3 scripts/validate_dataset.py data/processed/scievo_gold.jsonl` 可以检查字段完整性和轨迹一致性，运行 `python3 scripts/check_submission_readiness.py` 可以统一检查样本数、文档、质量报告、MinerU 记录和 Git 状态。
 
-## 6. 结尾
+## 6. 当前冲刺状态
+
+当前版本已经具备完整提交流程骨架，并给出开放来源筛选队列。但它还不是最终第一名版本，因为目前只有 1 条完整 gold case。下一步是按 `reports/VETTED_SOURCE_QUEUE.md` 优先级下载具备明确开放许可的 PDF，使用 MinerU 解析，并扩展到多条高质量案例。
+
+## 7. 结尾
 
 Sci-Evo-LabTrace 的目标是让大模型不仅知道科学结论，还能学习科学探索过程。后续数据集可以扩展到更多蛋白设计、药物发现和材料优化案例，并作为科学智能体训练和评测的基础数据。

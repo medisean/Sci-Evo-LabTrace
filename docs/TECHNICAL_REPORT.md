@@ -76,6 +76,11 @@ python3 scripts/make_quality_report.py
 - 科学一致性：关键指标、工具名、实验结果不得脱离原文证据。
 - 许可合规：每个来源记录 `license_status`，公开发布前必须完成许可复核。
 
+此外，仓库增加了两个面向提交冲刺的自动检查：
+
+- `scripts/vet_candidate_sources.py`：把 OpenAlex 候选元数据转换为“可安全本地处理 / 需人工复核 / 暂缓处理”的来源队列，避免在许可不清晰时直接抓取全文。
+- `scripts/check_submission_readiness.py`：统一检查 gold case 数量、评测任务、质量报告、MinerU 说明、关键文档和 Git 工作区状态，并生成 `reports/SUBMISSION_READINESS.md`。
+
 ## 7. 应用场景
 
 数据集可用于：
@@ -97,6 +102,23 @@ python3 scripts/make_quality_report.py
 - 1 个质量报告生成脚本。
 - 1 个评测任务生成脚本。
 - 1 个开放论文候选收集脚本。
+- 1 个开放来源许可筛选脚本。
+- 1 个提交就绪检查脚本。
 - 提交 README、技术报告和录屏脚本骨架。
 
-后续冲刺目标是在相同 schema 下扩展到 50-150 条 gold case，并生成对应的评测任务集。
+## 9. 与评分维度的对应
+
+- 数据价值与任务契合度：聚焦 Sci-Evo，而不是静态 QA；每条样本记录真实科研演化链路。
+- 数据质量：要求 schema 校验、逐步证据、最终验证字段和人工 gold 标注。
+- 工程完整度：提供数据构建、校验、评测任务生成、质量报告和提交就绪检查。
+- MinerU 使用深度：保留 Markdown、content list、layout 等本地解析产物，并把样本字段映射回页面与块级证据。
+- 可扩展与可复核性：通过开放来源候选收集、许可筛选队列和多 case 构建路径支持后续规模化扩展。
+
+## 10. 当前阻塞与下一步
+
+当前最大阻塞不是代码，而是来源材料：仓库内只有 1 篇已解析论文，因此还不能形成第一名级别的多样本 gold 数据集。下一步优先顺序是：
+
+1. 从 `reports/VETTED_SOURCE_QUEUE.md` 选择 `permitted_for_local_processing` 且有 PDF 链接的论文。
+2. 本地下载 PDF，使用 `scripts/mineru_parse.py` 和 token 文件解析。
+3. 完成逐条证据抽取与 gold case 编写，放入 `data/curated/cases/`。
+4. 重新生成数据集、评测任务、质量报告和提交就绪报告。
