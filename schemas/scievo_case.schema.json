@@ -1,0 +1,160 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Sci-Evo-LabTrace Case",
+  "type": "object",
+  "required": [
+    "case_id",
+    "dataset_version",
+    "sci_evo_type",
+    "domain",
+    "source",
+    "initial_request",
+    "agent_trajectory",
+    "success_verification",
+    "quality"
+  ],
+  "properties": {
+    "case_id": {
+      "type": "string",
+      "description": "Stable case identifier."
+    },
+    "dataset_version": {
+      "type": "string"
+    },
+    "sci_evo_type": {
+      "type": "string",
+      "enum": ["scientific_evolution_trace"]
+    },
+    "domain": {
+      "type": "array",
+      "items": {"type": "string"}
+    },
+    "source": {
+      "type": "object",
+      "required": ["title", "document_path", "license_status"],
+      "properties": {
+        "title": {"type": "string"},
+        "authors": {"type": "array", "items": {"type": "string"}},
+        "venue": {"type": "string"},
+        "year": {"type": "integer"},
+        "doi": {"type": "string"},
+        "url": {"type": "string"},
+        "document_path": {"type": "string"},
+        "license_status": {"type": "string"},
+        "mineru_artifact": {
+          "type": "object",
+          "properties": {
+            "markdown_path": {"type": "string"},
+            "content_json_path": {"type": "string"},
+            "images_dir": {"type": "string"},
+            "tables_dir": {"type": "string"}
+          }
+        }
+      }
+    },
+    "initial_request": {
+      "type": "object",
+      "required": ["target_name", "input_data", "user_intent", "quantifiable_goal"],
+      "properties": {
+        "target_name": {"type": "string"},
+        "input_data": {"type": "string"},
+        "user_intent": {"type": "string"},
+        "quantifiable_goal": {"type": "string"},
+        "evidence": {"type": "array", "items": {"$ref": "#/$defs/evidence"}}
+      }
+    },
+    "agent_trajectory": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": [
+          "step_index",
+          "phase",
+          "thought",
+          "action",
+          "tool",
+          "parameters",
+          "observation",
+          "outcome_type",
+          "valid",
+          "evidence"
+        ],
+        "properties": {
+          "step_index": {"type": "integer", "minimum": 1},
+          "phase": {"type": "string"},
+          "thought": {"type": "string"},
+          "action": {
+            "type": "string",
+            "enum": [
+              "dry_experiment",
+              "wet_experiment",
+              "analysis",
+              "simulation",
+              "measurement",
+              "validation",
+              "literature_reasoning"
+            ]
+          },
+          "tool": {
+            "type": "object",
+            "required": ["name"],
+            "properties": {
+              "name": {"type": "string"},
+              "version": {"type": "string"},
+              "category": {"type": "string"}
+            }
+          },
+          "parameters": {"type": "object"},
+          "observation": {"type": "string"},
+          "outcome_type": {
+            "type": "string",
+            "enum": ["success", "failure", "partial", "decision"]
+          },
+          "valid": {"type": "boolean"},
+          "references": {"type": "array"},
+          "evidence": {"type": "array", "items": {"$ref": "#/$defs/evidence"}}
+        }
+      }
+    },
+    "success_verification": {
+      "type": "object",
+      "required": ["validation_technique", "metrics", "final_verdict"],
+      "properties": {
+        "validation_technique": {"type": "string"},
+        "metrics": {"type": "object"},
+        "final_verdict": {"type": "string"},
+        "evidence": {"type": "array", "items": {"$ref": "#/$defs/evidence"}}
+      }
+    },
+    "quality": {
+      "type": "object",
+      "required": [
+        "schema_version",
+        "curation_level",
+        "evidence_coverage",
+        "requires_license_review"
+      ],
+      "properties": {
+        "schema_version": {"type": "string"},
+        "curation_level": {"type": "string", "enum": ["gold", "silver"]},
+        "evidence_coverage": {"type": "number", "minimum": 0, "maximum": 1},
+        "requires_license_review": {"type": "boolean"},
+        "notes": {"type": "string"}
+      }
+    }
+  },
+  "$defs": {
+    "evidence": {
+      "type": "object",
+      "required": ["source_doc", "page", "locator", "support"],
+      "properties": {
+        "source_doc": {"type": "string"},
+        "page": {"type": "integer", "minimum": 1},
+        "locator": {"type": "string"},
+        "support": {"type": "string"},
+        "mineru_block_id": {"type": "string"}
+      }
+    }
+  }
+}

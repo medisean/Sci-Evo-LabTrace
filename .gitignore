@@ -1,0 +1,8 @@
+mineru-api-token.txt
+.DS_Store
+__pycache__/
+*.pyc
+Sci-Evo-Sample.pdf
+赛道一：*.docx
+data/interim/mineru/*
+!data/interim/mineru/README.md
