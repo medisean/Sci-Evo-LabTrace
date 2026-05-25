@@ -1,0 +1,11 @@
+1. Slide 1 cover with metric rail and thesis box.
+2. Slide 2 three-stage pain/need cards.
+3. Slide 3 left-to-right pipeline architecture.
+4. Slide 4 MinerU evidence + KPI cards + right annotation rail.
+5. Slide 5 structured schema/table slide.
+6. Slide 6 request-to-decision transformation slide.
+7. Slide 7 deliverables manifest system map.
+8. Slide 8 quality loop metrics with two proof panels.
+9. Slide 9 submission pack / judge-first-view slide.
+10. Slide 10 dark roadmap and optional enhancement slide.
+Distinct layout families: cover, cards, pipeline, KPI+rail, table, profile-transform, hub-and-spoke deliverables, metric+bars, screenshot+summary, dark roadmap.

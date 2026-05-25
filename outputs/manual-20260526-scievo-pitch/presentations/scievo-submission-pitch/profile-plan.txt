@@ -1,0 +1,8 @@
+task mode: template-following
+primary deck-profile: template-following
+secondary profile gates: engineering-platform, appendix-heavy
+required proof objects: submission readiness metrics, dataset pipeline, MinerU evidence, dataset schema/table proof, deliverables manifest, quality/risk summary
+source/asset requirements: preserve reference PPT typography and layout; use only local project facts and existing deliverables; no fabricated screenshots
+brand authenticity constraints: keep inherited template chrome; replace EduMiner wording with Sci-Evo-LabTrace only in mapped text shapes
+profile-specific QA gates: no text overflow, no empty placeholders, every slide mapped to source slide, final deck exported via artifact-tool import/export
+known missing inputs: no polished product screenshots for demo slide, so use deliverables/status framing instead

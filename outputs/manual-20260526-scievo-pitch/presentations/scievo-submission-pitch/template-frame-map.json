@@ -1,0 +1,873 @@
+{
+  "outputSlides": [
+    {
+      "outputSlide": 1,
+      "sourceSlide": 1,
+      "narrativeRole": "opening thesis",
+      "reuseMode": "duplicate-slide",
+      "editTargets": [
+        {
+          "shapeId": "sh/cvixczed",
+          "action": "rewrite"
+        },
+        {
+          "shapeId": "sh/5gbq1ory",
+          "action": "rewrite"
+        },
+        {
+          "shapeId": "sh/udg7adsj",
+          "action": "rewrite"
+        },
+        {
+          "shapeId": "sh/nyd0z610",
+          "action": "rewrite"
+        },
+        {
+          "shapeId": "sh/u9knih4b",
+          "action": "rewrite"
+        },
+        {
+          "shapeId": "sh/judg7ads",
+          "action": "rewrite"
+        },
+        {
+          "shapeId": "sh/udg7adsj",
+          "action": "rewrite"
+        },
+        {
+          "shapeId": "sh/54zidony",
+          "action": "rewrite"
+        },
+        {
+          "shapeId": "sh/nap4r65w",
+          "action": "rewrite"
+        },
+        {
+          "shapeId": "sh/upwb2hwf",
+          "action": "rewrite"
+        },
+        {
+          "shapeId": "sh/cvixczed",
+          "action": "rewrite"
+        },
+        {
+          "shapeId": "sh/jm1cfa9w",
+          "action": "rewrite"
+        },
+        {
+          "shapeId": "sh/25kb6xkf",
+          "action": "rewrite"
+        },
+        {
+          "shapeId": "sh/rqd4vmtw",
+          "action": "rewrite"
+        },
+        {
+          "shapeId": "sh/kb6xkf6d",
+          "action": "rewrite"
+        },
+        {
+          "shapeId": "sh/9w3m94fu",
+          "action": "rewrite"
+        },
+        {
+          "shapeId": "sh/2t83itgf",
+          "action": "rewrite"
+        },
+        {
+          "shapeId": "sh/re1w7mp0",
+          "action": "rewrite"
+        }
+      ]
+    },
+    {
+      "outputSlide": 2,
+      "sourceSlide": 2,
+      "narrativeRole": "problem framing",
+      "reuseMode": "duplicate-slide",
+      "editTargets": [
+        {
+          "shapeId": "sh/g3ex0nux",
+          "action": "rewrite"
+        },
+        {
+          "shapeId": "sh/r65wjudg",
+          "action": "rewrite"
+        },
+        {
+          "shapeId": "sh/ylc7u54z",
+          "action": "rewrite"
+        },
+        {
+          "shapeId": "sh/9cvixcze",
+          "action": "rewrite"
+        },
+        {
+          "shapeId": "sh/rytsvu9k",
+          "action": "rewrite"
+        },
+        {
+          "shapeId": "sh/yd0z6103",
+          "action": "rewrite"
+        },
+        {
+          "shapeId": "sh/wb2hwfyx",
+          "action": "rewrite"
+        },
+        {
+          "shapeId": "sh/lwval87e",
+          "action": "rewrite"
+        },
+        {
+          "shapeId": "sh/3q5o7qpg",
+          "action": "rewrite"
+        },
+        {
+          "shapeId": "sh/w3m94fu1",
+          "action": "rewrite"
+        },
+        {
+          "shapeId": "sh/loj2t83i",
+          "action": "rewrite"
+        },
+        {
+          "shapeId": "sh/ex0nuxc3",
+          "action": "rewrite"
+        },
+        {
+          "shapeId": "sh/szqtcj6t",
+          "action": "rewrite"
+        },
+        {
+          "shapeId": "sh/lkjm1cfa",
+          "action": "rewrite"
+        },
+        {
+          "shapeId": "sh/lc7u54zi",
+          "action": "rewrite"
+        },
+        {
+          "shapeId": "sh/36hcrmhk",
+          "action": "rewrite"
+        },
+        {
+          "shapeId": "sh/eloj2t83",
+          "action": "rewrite"
+        }
+      ]
+    },
+    {
+      "outputSlide": 3,
+      "sourceSlide": 3,
+      "narrativeRole": "system architecture",
+      "reuseMode": "duplicate-slide",
+      "editTargets": [
+        {
+          "shapeId": "sh/dsji5sne",
+          "action": "rewrite"
+        },
+        {
+          "shapeId": "sh/6dcbulwv",
+          "action": "rewrite"
+        },
+        {
+          "shapeId": "sh/vy90je9c",
+          "action": "rewrite"
+        },
+        {
+          "shapeId": "sh/oj2t83it",
+          "action": "rewrite"
+        },
+        {
+          "shapeId": "sh/6hcrmhk3",
+          "action": "rewrite"
+        },
+        {
+          "shapeId": "sh/z25kb6xk",
+          "action": "rewrite"
+        },
+        {
+          "shapeId": "sh/vy90je9c",
+          "action": "rewrite"
+        },
+        {
+          "shapeId": "sh/d4vmtwra",
+          "action": "rewrite"
+        },
+        {
+          "shapeId": "sh/oj2t83it",
+          "action": "rewrite"
+        },
+        {
+          "shapeId": "sh/vmtwra5g",
+          "action": "rewrite"
+        },
+        {
+          "shapeId": "sh/dsji5sne",
+          "action": "rewrite"
+        },
+        {
+          "shapeId": "sh/o7qpg3ex",
+          "action": "rewrite"
+        },
+        {
+          "shapeId": "sh/vahoza1g",
+          "action": "rewrite"
+        },
+        {
+          "shapeId": "sh/epkzupwb",
+          "action": "rewrite"
+        },
+        {
+          "shapeId": "sh/7adsji5s",
+          "action": "rewrite"
+        },
+        {
+          "shapeId": "sh/wval87ed",
+          "action": "rewrite"
+        },
+        {
+          "shapeId": "sh/e1w7mp0b",
+          "action": "rewrite"
+        },
+        {
+          "shapeId": "sh/7mp0bi9s",
+          "action": "rewrite"
+        },
+        {
+          "shapeId": "sh/psfil0rq",
+          "action": "rewrite"
+        },
+        {
+          "shapeId": "sh/ed8bat47",
+          "action": "rewrite"
+        },
+        {
+          "shapeId": "sh/twra5gbq",
+          "action": "rewrite"
+        },
+        {
+          "shapeId": "sh/4byhgn29",
+          "action": "rewrite"
+        }
+      ]
+    },
+    {
+      "outputSlide": 4,
+      "sourceSlide": 4,
+      "narrativeRole": "mineru evidence",
+      "reuseMode": "duplicate-slide",
+      "editTargets": [
+        {
+          "shapeId": "sh/je9cvixc",
+          "action": "rewrite"
+        },
+        {
+          "shapeId": "sh/87ed8bat",
+          "action": "rewrite"
+        },
+        {
+          "shapeId": "sh/xs72x4na",
+          "action": "rewrite"
+        },
+        {
+          "shapeId": "sh/q1orytsv",
+          "action": "rewrite"
+        },
+        {
+          "shapeId": "sh/8jqh0fep",
+          "action": "rewrite"
+        },
+        {
+          "shapeId": "sh/x4nap4r6",
+          "action": "rewrite"
+        },
+        {
+          "shapeId": "sh/8bat47y1",
+          "action": "rewrite"
+        },
+        {
+          "shapeId": "sh/jqh0fepk",
+          "action": "rewrite"
+        },
+        {
+          "shapeId": "sh/18jqh0fe",
+          "action": "rewrite"
+        },
+        {
+          "shapeId": "sh/8nqxs72x",
+          "action": "rewrite"
+        },
+        {
+          "shapeId": "sh/qh0fepkz",
+          "action": "rewrite"
+        },
+        {
+          "shapeId": "sh/1cfa9w3m",
+          "action": "rewrite"
+        },
+        {
+          "shapeId": "sh/crmhk3q5",
+          "action": "rewrite"
+        },
+        {
+          "shapeId": "sh/sfil0rqd",
+          "action": "rewrite"
+        },
+        {
+          "shapeId": "sh/h0fepkzu",
+          "action": "rewrite"
+        },
+        {
+          "shapeId": "sh/a9w3m94f",
+          "action": "rewrite"
+        },
+        {
+          "shapeId": "sh/zupwb2hw",
+          "action": "rewrite"
+        },
+        {
+          "shapeId": "sh/orytsvu9",
+          "action": "rewrite"
+        },
+        {
+          "shapeId": "sh/hcrmhk3q",
+          "action": "rewrite"
+        },
+        {
+          "shapeId": "sh/al87ed8b",
+          "action": "rewrite"
+        },
+        {
+          "shapeId": "sh/z61032ls",
+          "action": "rewrite"
+        },
+        {
+          "shapeId": "sh/oza1gvy9",
+          "action": "rewrite"
+        }
+      ]
+    },
+    {
+      "outputSlide": 5,
+      "sourceSlide": 5,
+      "narrativeRole": "schema proof",
+      "reuseMode": "duplicate-slide",
+      "editTargets": [
+        {
+          "shapeId": "sh/dg7adsji",
+          "action": "rewrite"
+        },
+        {
+          "shapeId": "sh/6hcrmhk3",
+          "action": "rewrite"
+        },
+        {
+          "shapeId": "sh/z25kb6xk",
+          "action": "rewrite"
+        },
+        {
+          "shapeId": "sh/onyd0z61",
+          "action": "rewrite"
+        },
+        {
+          "shapeId": "sh/6dcbulwv",
+          "action": "rewrite"
+        },
+        {
+          "shapeId": "sh/nuxc3ylc",
+          "action": "rewrite"
+        },
+        {
+          "shapeId": "sh/5wjudg7a",
+          "action": "rewrite"
+        },
+        {
+          "shapeId": "sh/n29gr2p8",
+          "action": "rewrite"
+        },
+        {
+          "shapeId": "sh/58z25kb6",
+          "action": "rewrite"
+        },
+        {
+          "shapeId": "sh/neloj2t8",
+          "action": "rewrite"
+        },
+        {
+          "shapeId": "sh/2x4nap4r",
+          "action": "rewrite"
+        },
+        {
+          "shapeId": "sh/k3q5o7qp",
+          "action": "rewrite"
+        },
+        {
+          "shapeId": "sh/6psfil0r",
+          "action": "rewrite"
+        },
+        {
+          "shapeId": "sh/kre1w7mp",
+          "action": "rewrite"
+        },
+        {
+          "shapeId": "sh/2lszqtcj",
+          "action": "rewrite"
+        },
+        {
+          "shapeId": "sh/h4byhgn2",
+          "action": "rewrite"
+        },
+        {
+          "shapeId": "sh/3ylc7u54",
+          "action": "rewrite"
+        },
+        {
+          "shapeId": "sh/lszqtcj6",
+          "action": "rewrite"
+        },
+        {
+          "shapeId": "sh/3m94fu18",
+          "action": "rewrite"
+        },
+        {
+          "shapeId": "sh/hoza1gvy",
+          "action": "rewrite"
+        },
+        {
+          "shapeId": "sh/wval87ed",
+          "action": "rewrite"
+        },
+        {
+          "shapeId": "sh/epkzupwb",
+          "action": "rewrite"
+        },
+        {
+          "shapeId": "sh/w7mp0bi9",
+          "action": "rewrite"
+        },
+        {
+          "shapeId": "sh/e1w7mp0b",
+          "action": "rewrite"
+        },
+        {
+          "shapeId": "sh/wfyxobm5",
+          "action": "rewrite"
+        },
+        {
+          "shapeId": "sh/b2hwfyxo",
+          "action": "rewrite"
+        },
+        {
+          "shapeId": "sh/t83itgfm",
+          "action": "rewrite"
+        },
+        {
+          "shapeId": "sh/bq1oryts",
+          "action": "rewrite"
+        },
+        {
+          "shapeId": "sh/twra5gbq",
+          "action": "rewrite"
+        },
+        {
+          "shapeId": "sh/4byhgn29",
+          "action": "rewrite"
+        }
+      ]
+    },
+    {
+      "outputSlide": 6,
+      "sourceSlide": 6,
+      "narrativeRole": "annotation workflow",
+      "reuseMode": "duplicate-slide",
+      "editTargets": [
+        {
+          "shapeId": "sh/r65wjudg",
+          "action": "rewrite"
+        },
+        {
+          "shapeId": "sh/g3ex0nux",
+          "action": "rewrite"
+        },
+        {
+          "shapeId": "sh/5o7qpg3e",
+          "action": "rewrite"
+        },
+        {
+          "shapeId": "sh/yxobm58z",
+          "action": "rewrite"
+        },
+        {
+          "shapeId": "sh/g7adsji5",
+          "action": "rewrite"
+        },
+        {
+          "shapeId": "sh/9s36hcrm",
+          "action": "rewrite"
+        },
+        {
+          "shapeId": "sh/d8v6psfi",
+          "action": "rewrite"
+        },
+        {
+          "shapeId": "sh/onyd0z61",
+          "action": "rewrite"
+        },
+        {
+          "shapeId": "sh/z25kb6xk",
+          "action": "rewrite"
+        },
+        {
+          "shapeId": "sh/6hcrmhk3",
+          "action": "rewrite"
+        },
+        {
+          "shapeId": "sh/dg7adsji",
+          "action": "rewrite"
+        },
+        {
+          "shapeId": "sh/ovahoza1",
+          "action": "rewrite"
+        },
+        {
+          "shapeId": "sh/dsji5sne",
+          "action": "rewrite"
+        },
+        {
+          "shapeId": "sh/o7qpg3ex",
+          "action": "rewrite"
+        },
+        {
+          "shapeId": "sh/kjm1cfa9",
+          "action": "rewrite"
+        },
+        {
+          "shapeId": "sh/94fu18jq",
+          "action": "rewrite"
+        },
+        {
+          "shapeId": "sh/2hwfyxob",
+          "action": "rewrite"
+        },
+        {
+          "shapeId": "sh/r2p8nqxs",
+          "action": "rewrite"
+        },
+        {
+          "shapeId": "sh/gvy90je9",
+          "action": "rewrite"
+        },
+        {
+          "shapeId": "sh/9gr2p8nq",
+          "action": "rewrite"
+        },
+        {
+          "shapeId": "sh/2p8nqxs7",
+          "action": "rewrite"
+        },
+        {
+          "shapeId": "sh/ra5gbq1o",
+          "action": "rewrite"
+        }
+      ]
+    },
+    {
+      "outputSlide": 7,
+      "sourceSlide": 7,
+      "narrativeRole": "deliverables system",
+      "reuseMode": "duplicate-slide",
+      "editTargets": [
+        {
+          "shapeId": "sh/8jqh0fep",
+          "action": "rewrite"
+        },
+        {
+          "shapeId": "sh/fa9w3m94",
+          "action": "rewrite"
+        },
+        {
+          "shapeId": "sh/qpg3ex0n",
+          "action": "rewrite"
+        },
+        {
+          "shapeId": "sh/xczed8v6",
+          "action": "rewrite"
+        },
+        {
+          "shapeId": "sh/je9cvixc",
+          "action": "rewrite"
+        },
+        {
+          "shapeId": "sh/qtcj6tov",
+          "action": "rewrite"
+        },
+        {
+          "shapeId": "sh/hgn29gr2",
+          "action": "rewrite"
+        },
+        {
+          "shapeId": "sh/ap4r65wj",
+          "action": "rewrite"
+        },
+        {
+          "shapeId": "sh/s36hcrmh",
+          "action": "rewrite"
+        },
+        {
+          "shapeId": "sh/hoza1gvy",
+          "action": "rewrite"
+        },
+        {
+          "shapeId": "sh/zidonyd0",
+          "action": "rewrite"
+        },
+        {
+          "shapeId": "sh/s72x4nap",
+          "action": "rewrite"
+        },
+        {
+          "shapeId": "sh/pg3ex0nu",
+          "action": "rewrite"
+        },
+        {
+          "shapeId": "sh/wval87ed",
+          "action": "rewrite"
+        },
+        {
+          "shapeId": "sh/a9w3m94f",
+          "action": "rewrite"
+        }
+      ]
+    },
+    {
+      "outputSlide": 8,
+      "sourceSlide": 8,
+      "narrativeRole": "quality loop",
+      "reuseMode": "duplicate-slide",
+      "editTargets": [
+        {
+          "shapeId": "sh/judg7ads",
+          "action": "rewrite"
+        },
+        {
+          "shapeId": "sh/c7u54zid",
+          "action": "rewrite"
+        },
+        {
+          "shapeId": "sh/1orytsvu",
+          "action": "rewrite"
+        },
+        {
+          "shapeId": "sh/u18jqh0f",
+          "action": "rewrite"
+        },
+        {
+          "shapeId": "sh/cvixczed",
+          "action": "rewrite"
+        },
+        {
+          "shapeId": "sh/5gbq1ory",
+          "action": "rewrite"
+        },
+        {
+          "shapeId": "sh/8nqxs72x",
+          "action": "rewrite"
+        },
+        {
+          "shapeId": "sh/j2t83itg",
+          "action": "rewrite"
+        },
+        {
+          "shapeId": "sh/1w7mp0bi",
+          "action": "rewrite"
+        },
+        {
+          "shapeId": "sh/8bat47y1",
+          "action": "rewrite"
+        },
+        {
+          "shapeId": "sh/q5o7qpg3",
+          "action": "rewrite"
+        },
+        {
+          "shapeId": "sh/1kre1w7m",
+          "action": "rewrite"
+        },
+        {
+          "shapeId": "sh/orytsvu9",
+          "action": "rewrite"
+        },
+        {
+          "shapeId": "sh/hcrmhk3q",
+          "action": "rewrite"
+        },
+        {
+          "shapeId": "sh/z61032ls",
+          "action": "rewrite"
+        },
+        {
+          "shapeId": "sh/sfil0rqd",
+          "action": "rewrite"
+        },
+        {
+          "shapeId": "sh/a9w3m94f",
+          "action": "rewrite"
+        },
+        {
+          "shapeId": "sh/zupwb2hw",
+          "action": "rewrite"
+        },
+        {
+          "shapeId": "sh/hwfyxobm",
+          "action": "rewrite"
+        },
+        {
+          "shapeId": "sh/ed8bat47",
+          "action": "rewrite"
+        },
+        {
+          "shapeId": "sh/l0rqd4vm",
+          "action": "rewrite"
+        }
+      ]
+    },
+    {
+      "outputSlide": 9,
+      "sourceSlide": 9,
+      "narrativeRole": "judge-first view",
+      "reuseMode": "duplicate-slide",
+      "editTargets": [
+        {
+          "shapeId": "sh/dg7adsji",
+          "action": "rewrite"
+        },
+        {
+          "shapeId": "sh/6hcrmhk3",
+          "action": "rewrite"
+        },
+        {
+          "shapeId": "sh/z25kb6xk",
+          "action": "rewrite"
+        },
+        {
+          "shapeId": "sh/onyd0z61",
+          "action": "rewrite"
+        },
+        {
+          "shapeId": "sh/nuxc3ylc",
+          "action": "rewrite"
+        },
+        {
+          "shapeId": "sh/y90je9cv",
+          "action": "rewrite"
+        },
+        {
+          "shapeId": "sh/5wjudg7a",
+          "action": "rewrite"
+        },
+        {
+          "shapeId": "sh/gbq1oryt",
+          "action": "rewrite"
+        },
+        {
+          "shapeId": "sh/n29gr2p8",
+          "action": "rewrite"
+        },
+        {
+          "shapeId": "sh/yhgn29gr",
+          "action": "rewrite"
+        },
+        {
+          "shapeId": "sh/58z25kb6",
+          "action": "rewrite"
+        },
+        {
+          "shapeId": "sh/gn29gr2p",
+          "action": "rewrite"
+        },
+        {
+          "shapeId": "sh/neloj2t8",
+          "action": "rewrite"
+        }
+      ]
+    },
+    {
+      "outputSlide": 10,
+      "sourceSlide": 10,
+      "narrativeRole": "roadmap and close",
+      "reuseMode": "duplicate-slide",
+      "editTargets": [
+        {
+          "shapeId": "sh/gvy90je9",
+          "action": "rewrite"
+        },
+        {
+          "shapeId": "sh/r2p8nqxs",
+          "action": "rewrite"
+        },
+        {
+          "shapeId": "sh/2hwfyxob",
+          "action": "rewrite"
+        },
+        {
+          "shapeId": "sh/94fu18jq",
+          "action": "rewrite"
+        },
+        {
+          "shapeId": "sh/rqd4vmtw",
+          "action": "rewrite"
+        },
+        {
+          "shapeId": "sh/25kb6xkf",
+          "action": "rewrite"
+        },
+        {
+          "shapeId": "sh/4fu18jqh",
+          "action": "rewrite"
+        },
+        {
+          "shapeId": "sh/m94fu18j",
+          "action": "rewrite"
+        },
+        {
+          "shapeId": "sh/fu18jqh0",
+          "action": "rewrite"
+        },
+        {
+          "shapeId": "sh/83itgfml",
+          "action": "rewrite"
+        },
+        {
+          "shapeId": "sh/qxs72x4n",
+          "action": "rewrite"
+        },
+        {
+          "shapeId": "sh/fil0rqd4",
+          "action": "rewrite"
+        },
+        {
+          "shapeId": "sh/4zidonyd",
+          "action": "rewrite"
+        },
+        {
+          "shapeId": "sh/xczed8v6",
+          "action": "rewrite"
+        },
+        {
+          "shapeId": "sh/8v6psfil",
+          "action": "rewrite"
+        },
+        {
+          "shapeId": "sh/fa9w3m94",
+          "action": "rewrite"
+        },
+        {
+          "shapeId": "sh/x4nap4r6",
+          "action": "rewrite"
+        }
+      ]
+    }
+  ],
+  "omittedSourceSlides": []
+}

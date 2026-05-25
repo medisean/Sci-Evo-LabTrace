@@ -1,0 +1,27 @@
+{
+  "dataset_name": "Sci-Evo-LabTrace",
+  "version": "0.1.0",
+  "case_count": 3,
+  "gold_case_count": 3,
+  "silver_case_count": 0,
+  "license_review_required_count": 1,
+  "cases_with_mineru_artifacts": 1,
+  "processed_file": "data/processed/scievo_gold.jsonl",
+  "eval_tasks_file": "data/processed/scievo_eval_tasks.jsonl",
+  "candidate_sources_file": "data/raw/candidate_papers.jsonl",
+  "vetted_sources_file": "data/processed/vetted_open_access_sources.jsonl",
+  "schema_file": "schemas/scievo_case.schema.json",
+  "created_from": [
+    "Sci-Evo_tool_case.json",
+    "data/curated/cases/*.json"
+  ],
+  "readiness": {
+    "dataset_jsonl_validated": true,
+    "minimum_complete_gold_cases": true,
+    "mineru_usage_documented": true,
+    "docs_complete": true,
+    "quality_report_expected": true,
+    "source_license_risks_explicit": true,
+    "git_clean_required_before_submission": true
+  }
+}

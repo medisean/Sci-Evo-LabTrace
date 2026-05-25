@@ -1,0 +1,5 @@
+Source deck has 10 slides with a beige/light editorial system, blue section markers, dark thesis cards, left-aligned titles, and strong page chrome.
+Reusable patterns: cover metric rail, 3-card pain slide, 5-step horizontal pipeline, KPI + right evidence panel, table/matrix slide, profile-to-plan transformation, deliverables hub slide, quality metric + two proof boxes, left screenshot + right summary, dark roadmap close.
+Typography and spacing must stay inherited from the source deck; edited copy should be shorter than source where needed.
+Inherited placeholders appear to be ordinary text boxes rather than blank author prompts; page number and footer chrome are preserved on every slide.
+Insertion contract: no fresh slides, no overlay redesign, only inherited text edits and optional image replacement if needed.

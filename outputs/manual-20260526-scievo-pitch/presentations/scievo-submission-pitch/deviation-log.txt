@@ -1,0 +1,2 @@
+- Slide 9 keeps the screenshot frame but repurposes it to present submission-pack artifacts rather than a web demo, because the Sci-Evo repo has no polished web UI screenshot.
+- Slide 10 keeps the roadmap structure but reframes it as optional enhancements, since the project is already submission-ready.
