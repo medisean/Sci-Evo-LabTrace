@@ -37,7 +37,14 @@ def load_jsonl(path: Path) -> list[dict]:
 
 def git_is_clean() -> bool:
     result = subprocess.run(
-        ["git", "status", "--short"],
+        [
+            "git",
+            "status",
+            "--short",
+            "--",
+            ".",
+            ":(exclude)reports/SUBMISSION_READINESS.md",
+        ],
         cwd=ROOT,
         text=True,
         capture_output=True,
