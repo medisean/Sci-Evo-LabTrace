@@ -3,9 +3,9 @@
 ## Overall
 
 - Ready to submit: no
-- Gold cases: 1
-- Total cases: 1
-- Evaluation tasks: 15
+- Gold cases: 3
+- Total cases: 3
+- Evaluation tasks: 37
 - Vetted OA candidates: 25
 - Manifest version: 0.1.0
 
@@ -13,7 +13,7 @@
 
 - dataset_jsonl_exists: pass
 - dataset_has_cases: pass
-- minimum_complete_gold_cases_met: fail
+- minimum_complete_gold_cases_met: pass
 - manifest_present: pass
 - mineru_usage_documented: pass
 - quality_report_present: pass
@@ -24,5 +24,4 @@
 
 ## Blocking Gaps
 
-- Fewer than 3 complete gold cases are present; first-place-quality expansion still needs more evidence-backed papers.
 - Worktree is not clean.

@@ -1,8 +1,8 @@
 {
   "dataset_name": "Sci-Evo-LabTrace",
   "version": "0.1.0",
-  "case_count": 1,
-  "gold_case_count": 1,
+  "case_count": 3,
+  "gold_case_count": 3,
   "silver_case_count": 0,
   "license_review_required_count": 1,
   "cases_with_mineru_artifacts": 1,
@@ -17,7 +17,7 @@
   ],
   "readiness": {
     "dataset_jsonl_validated": false,
-    "minimum_complete_gold_cases": false,
+    "minimum_complete_gold_cases": true,
     "mineru_usage_documented": true,
     "docs_complete": true,
     "quality_report_expected": true,

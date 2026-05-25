@@ -2,32 +2,41 @@
 
 ## Summary
 
-- Cases: 1
-- Trajectory steps: 7
-- Evaluation tasks: 15
+- Cases: 3
+- Trajectory steps: 17
+- Evaluation tasks: 37
 - Expansion paper candidates: 25
 - Vetted OA sources: 25
-- Average evidence items per step: 1.43
+- Average evidence items per step: 1.41
 - Submission readiness report: present
 
 ## Curation Levels
 
-- gold: 1
+- gold: 3
 
 ## Action Distribution
 
-- dry_experiment: 4
-- wet_experiment: 3
+- analysis: 4
+- dry_experiment: 6
+- measurement: 1
+- simulation: 2
+- wet_experiment: 4
 
 ## Domain Tags
 
+- biocatalysis: 1
 - bioluminescence: 1
-- enzyme_engineering: 1
-- protein_design: 1
+- computational_protein_design: 1
+- directed_evolution: 1
+- enzyme_engineering: 3
+- machine_learning: 1
+- protein_design: 2
+- structural_biology: 1
 - synthetic_biology: 1
 
 ## License Statuses
 
+- explicit_open_license_cc_by: 2
 - sample_from_competition_package_requires_review_before_public_release: 1
 
 ## Vetted Source Queue
@@ -39,6 +48,5 @@
 ## Current Risks
 
 - Source license status must be reviewed before public release.
-- Current seed release should be expanded to at least 3 complete gold cases before submission.
-- MinerU parsing artifacts should be attached for the formal submission.
-- Additional vetted OA PDFs still need to be downloaded and parsed locally before new gold cases can be curated.
+- Only a subset of cases currently have local MinerU artifacts attached; additional OA papers should be parsed locally for the final package.
+- Additional vetted OA PDFs remain available if a larger final submission is needed.

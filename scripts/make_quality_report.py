@@ -47,6 +47,19 @@ def main() -> None:
             step_count += 1
             evidence_count += len(step.get("evidence", []))
     avg_evidence = evidence_count / step_count if step_count else 0
+    gold_cases = curation.get("gold", 0)
+    local_mineru_cases = sum(1 for case in cases if case.get("source", {}).get("mineru_artifact"))
+    risks: list[str] = []
+    if any(case.get("quality", {}).get("requires_license_review") for case in cases):
+        risks.append("- Source license status must be reviewed before public release.")
+    if gold_cases < 3:
+        risks.append("- Current release still needs at least 3 complete gold cases before submission.")
+    if local_mineru_cases < len(cases):
+        risks.append("- Only a subset of cases currently have local MinerU artifacts attached; additional OA papers should be parsed locally for the final package.")
+    if len(vetted) > gold_cases:
+        risks.append("- Additional vetted OA PDFs remain available if a larger final submission is needed.")
+    if not risks:
+        risks.append("- No major dataset-quality blockers detected; remaining work is packaging and final submission hygiene.")
 
     OUT.parent.mkdir(parents=True, exist_ok=True)
     with OUT.open("w", encoding="utf-8") as f:
@@ -75,10 +88,8 @@ def main() -> None:
         for name, count in sorted(vetting_statuses.items()):
             f.write(f"- {name}: {count}\n")
         f.write("\n## Current Risks\n\n")
-        f.write("- Source license status must be reviewed before public release.\n")
-        f.write("- Current seed release should be expanded to at least 3 complete gold cases before submission.\n")
-        f.write("- MinerU parsing artifacts should be attached for the formal submission.\n")
-        f.write("- Additional vetted OA PDFs still need to be downloaded and parsed locally before new gold cases can be curated.\n")
+        for risk in risks:
+            f.write(f"{risk}\n")
     print(f"Wrote {OUT}")
 
 

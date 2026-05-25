@@ -95,7 +95,7 @@ python3 scripts/make_quality_report.py
 
 版本 `0.1.0` 是可提交底座版本，包含：
 
-- 1 条 gold seed case。
+- 3 条 gold case（1 条赛事样例 + 2 条 CC-BY 开放论文案例）。
 - 1 套 Sci-Evo case schema。
 - 1 个构建脚本。
 - 1 个验证脚本。
@@ -116,9 +116,9 @@ python3 scripts/make_quality_report.py
 
 ## 10. 当前阻塞与下一步
 
-当前最大阻塞不是代码，而是来源材料：仓库内只有 1 篇已解析论文，因此还不能形成第一名级别的多样本 gold 数据集。下一步优先顺序是：
+当前版本已经达到“至少 3 条完整 gold case”的基础提交门槛。剩余阻塞主要是提交打包而不是数据结构本身。下一步优先顺序是：
 
-1. 从 `reports/VETTED_SOURCE_QUEUE.md` 选择 `permitted_for_local_processing` 且有 PDF 链接的论文。
-2. 本地下载 PDF，使用 `scripts/mineru_parse.py` 和 token 文件解析。
-3. 完成逐条证据抽取与 gold case 编写，放入 `data/curated/cases/`。
-4. 重新生成数据集、评测任务、质量报告和提交就绪报告。
+1. 在最终提交前用 `git status --short` 确认工作区干净，并保留明确提交记录。
+2. 如需进一步冲击更高排名，从 `reports/VETTED_SOURCE_QUEUE.md` 继续扩展更多 `permitted_for_local_processing` 的开放论文。
+3. 对新增开放论文使用 `scripts/mineru_parse.py` 和 token 文件补齐本地 MinerU 解析产物。
+4. 重新生成数据集、评测任务、质量报告和提交就绪报告，并导出最终技术报告/PDF。

@@ -75,12 +75,13 @@ papers whose license metadata is explicit enough for local MinerU parsing.
 
 ## Current Status
 
-- Dataset build/validation pipeline is in place and currently produces 1 gold
-  case and 15 evaluation tasks.
-- MinerU usage is documented with local run artifacts for the seed paper.
+- Dataset build/validation pipeline is in place and currently produces 3 gold
+  cases and 37 evaluation tasks.
+- MinerU usage is documented with local run artifacts for the seed paper, and
+  two additional gold cases are curated from explicit CC-BY open-access PDFs.
 - Submission docs, checklist, quality report, and readiness report are present.
-- The remaining first-place blocker is expansion to multiple evidence-complete
-  gold cases from vetted open-access PDFs.
+- The main remaining submission gate is repository hygiene: the final handoff
+  should be committed and packaged from a clean git status.
 
 ## License
 
