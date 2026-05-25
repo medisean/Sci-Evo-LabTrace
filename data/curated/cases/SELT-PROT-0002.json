@@ -259,6 +259,6 @@
     "curation_level": "gold",
     "evidence_coverage": 1.0,
     "requires_license_review": false,
-    "notes": "Curated from the CC-BY Nature Communications PDF using page-level evidence from the official open-access article. Curated source file: data/curated/cases/SELT-PROT-0002.json"
+    "notes": "基于 Nature Communications 的 CC-BY 开放论文人工整理，并保留页面级证据指针。"
   }
 }

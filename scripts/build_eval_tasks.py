@@ -41,7 +41,7 @@ def build_next_step_tasks(case: dict) -> list[dict]:
             "task_id": f"{case['case_id']}-NEXT-{step['step_index']:02d}",
             "case_id": case["case_id"],
             "task_type": "next_step_decision",
-            "instruction": "Given the scientific objective and previous trajectory, predict the next research decision, action type, tool, and expected observation.",
+            "instruction": "给定科研目标和已有轨迹，预测下一步科研决策、动作类型、工具选择和预期观察结果。",
             "input": {
                 "initial_request": case["initial_request"],
                 "previous_steps": previous_steps,
@@ -69,7 +69,7 @@ def build_failure_gap_tasks(case: dict) -> list[dict]:
             "task_id": f"{case['case_id']}-GAP-{step['step_index']:02d}",
             "case_id": case["case_id"],
             "task_type": "gap_to_decision_reasoning",
-            "instruction": "Extract the unresolved scientific gap and explain why the recorded decision addresses it.",
+            "instruction": "抽取当前未解决的科学问题或能力缺口，并解释记录中的决策为什么能够回应这一缺口。",
             "input": {
                 "thought": thought,
                 "observation": step["observation"],
@@ -90,7 +90,7 @@ def build_metric_task(case: dict) -> dict:
         "task_id": f"{case['case_id']}-METRICS",
         "case_id": case["case_id"],
         "task_type": "success_metric_extraction",
-        "instruction": "Extract the final verification methods, success metrics, and final verdict for the scientific trajectory.",
+        "instruction": "抽取该科研轨迹的最终验证方法、成功指标和最终结论。",
         "input": {
             "initial_request": case["initial_request"],
             "trajectory_observations": [

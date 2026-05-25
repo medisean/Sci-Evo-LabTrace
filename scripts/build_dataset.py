@@ -47,13 +47,13 @@ EVIDENCE_BY_STEP = {
             "source_doc": "Sci-Evo-Sample.pdf",
             "page": 2,
             "locator": "Family-wide hallucination section and Fig. 1a",
-            "support": "The paper describes Monte Carlo sequence search with trRosetta on naturally occurring NTF2s.",
+            "support": "论文描述了基于 trRosetta、以天然 NTF2 序列为起点的 Monte Carlo 序列搜索。",
         },
         {
             "source_doc": "Sci-Evo-Sample.pdf",
             "page": 3,
             "locator": "Family-wide hallucination continuation",
-            "support": "The paper reports 1,615 family-wide hallucinated NTF2 scaffolds.",
+            "support": "论文报告生成了 1,615 个 family-wide hallucinated NTF2 scaffold。",
         },
     ],
     2: [
@@ -61,7 +61,7 @@ EVIDENCE_BY_STEP = {
             "source_doc": "Sci-Evo-Sample.pdf",
             "page": 3,
             "locator": "De novo design of luciferases for DTZ",
-            "support": "The paper describes DTZ conformer generation, RifGen RIF enumeration, and RifDock placement.",
+            "support": "论文描述了 DTZ 构象生成、RifGen RIF 枚举和 RifDock 放置流程。",
         }
     ],
     3: [
@@ -69,7 +69,7 @@ EVIDENCE_BY_STEP = {
             "source_doc": "Sci-Evo-Sample.pdf",
             "page": 3,
             "locator": "RosettaDesign paragraph",
-            "support": "The paper reports sequence optimization and selection of 7,648 designs for screening.",
+            "support": "论文报告经过序列优化后选出 7,648 个设计用于实验筛选。",
         }
     ],
     4: [
@@ -77,7 +77,7 @@ EVIDENCE_BY_STEP = {
             "source_doc": "Sci-Evo-Sample.pdf",
             "page": 3,
             "locator": "Identification of active luciferases",
-            "support": "The paper describes E. coli expression, colony imaging, and 96-well confirmation.",
+            "support": "论文描述了大肠杆菌表达、菌落成像和 96 孔板验证流程。",
         }
     ],
     5: [
@@ -85,7 +85,7 @@ EVIDENCE_BY_STEP = {
             "source_doc": "Sci-Evo-Sample.pdf",
             "page": 3,
             "locator": "De novo design of luciferases for h-CTZ",
-            "support": "The paper describes using prior design knowledge to create h-CTZ-specific luciferases.",
+            "support": "论文描述了利用第一轮设计经验创建 h-CTZ 特异性荧光素酶。",
         }
     ],
     6: [
@@ -93,13 +93,13 @@ EVIDENCE_BY_STEP = {
             "source_doc": "Sci-Evo-Sample.pdf",
             "page": 3,
             "locator": "Site-saturation mutagenesis paragraph",
-            "support": "The paper describes SSM over substrate-binding pocket residues.",
+            "support": "论文描述了针对底物结合口袋残基的位点饱和突变。",
         },
         {
             "source_doc": "Sci-Evo-Sample.pdf",
             "page": 4,
             "locator": "Optimization results",
-            "support": "The paper reports LuxSit-i with more than 100-fold higher photon flux.",
+            "support": "论文报告 LuxSit-i 的 photon flux 比 LuxSit 提高超过 100 倍。",
         },
     ],
     7: [
@@ -107,13 +107,13 @@ EVIDENCE_BY_STEP = {
             "source_doc": "Sci-Evo-Sample.pdf",
             "page": 5,
             "locator": "Mammalian-cell validation paragraph",
-            "support": "The paper describes live HEK293T-cell expression and DTZ-specific luminescence.",
+            "support": "论文描述了 HEK293T 活细胞表达和 DTZ 特异性发光验证。",
         },
         {
             "source_doc": "Sci-Evo-Sample.pdf",
             "page": 6,
             "locator": "Multiplex luciferase assay schematic",
-            "support": "The paper describes multiplex reporter assays with HEK293T cells.",
+            "support": "论文描述了基于 HEK293T 细胞的多路 reporter assay。",
         },
     ],
 }
@@ -243,7 +243,7 @@ def build_seed_case(source: dict) -> dict:
                     "source_doc": "Sci-Evo-Sample.pdf",
                     "page": 1,
                     "locator": "Abstract",
-                    "support": "The abstract states the goal of designing artificial luciferases for synthetic luciferin substrates.",
+                    "support": "摘要说明了针对合成 luciferin 底物设计人工荧光素酶的目标。",
                 }
             ],
         },
@@ -257,13 +257,13 @@ def build_seed_case(source: dict) -> dict:
                     "source_doc": "Sci-Evo-Sample.pdf",
                     "page": 5,
                     "locator": "Biochemical characterization paragraph",
-                    "support": "The paper reports catalytic efficiency, selectivity, and live-cell validation outcomes.",
+                    "support": "论文报告了催化效率、底物选择性和活细胞验证结果。",
                 },
                 {
                     "source_doc": "Sci-Evo-Sample.pdf",
                     "page": 8,
                     "locator": "Data availability section",
-                    "support": "The paper identifies public source data and model/plasmid availability.",
+                    "support": "论文说明了源数据、设计模型和质粒等材料的可获得性。",
                 },
             ],
         },
@@ -272,7 +272,7 @@ def build_seed_case(source: dict) -> dict:
             "curation_level": "gold",
             "evidence_coverage": 1.0,
             "requires_license_review": True,
-            "notes": "Seed case derived from competition-provided sample files and enriched with page-level evidence pointers.",
+            "notes": "种子 case 来自赛事提供的样例文件，并补充了页面级证据指针。",
         },
     }
 
@@ -286,8 +286,8 @@ def load_curated_cases() -> list[dict]:
             case = json.load(f)
         case.setdefault("quality", {})
         notes = case["quality"].get("notes", "")
-        provenance = f"Curated source file: {path.relative_to(ROOT)}"
-        case["quality"]["notes"] = f"{notes} {provenance}".strip()
+        provenance = f"人工扩展来源文件：{path.relative_to(ROOT)}"
+        case["quality"]["notes"] = notes if provenance in notes else f"{notes} {provenance}".strip()
         cases.append(case)
     return cases
 

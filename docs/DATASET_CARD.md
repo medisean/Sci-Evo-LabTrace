@@ -1,47 +1,46 @@
-# Dataset Card: Sci-Evo-LabTrace
+# 数据集卡片：Sci-Evo-LabTrace
 
-## Dataset Type
+## 数据类型
 
-Sci-Evo scientific evolution data.
+Sci-Evo 科学演化数据。
 
-## Domain
+## 覆盖领域
 
-Protein design, enzyme engineering, synthetic biology, and bioluminescence.
+蛋白设计、酶工程、合成生物学、生物催化和生物发光。
 
-## Intended Use
+## 预期用途
 
-- Training AI4S agents to understand scientific research trajectories.
-- Evaluating next-step scientific decision making.
-- Studying tool-use reasoning in computational and wet-lab workflows.
-- Building traceable scientific process knowledge bases.
+- 训练 AI4S 智能体理解真实科研轨迹。
+- 评测模型在科研过程中的下一步决策能力。
+- 研究计算设计、湿实验验证和优化循环中的工具调用推理。
+- 构建可追溯的科研过程知识库。
 
-## Data Format
+## 数据格式
 
-JSON Lines. Each line is one scientific evolution case.
+JSON Lines。每一行是一条完整科学演化 case。
 
-## Annotation Level
+## 标注等级
 
-Current seed release: 1 gold curated sample.
+当前版本包含 3 条 gold curated case，并可继续扩展 silver 自动抽取样本。
 
-Planned release: gold curated cases plus silver automatically extracted cases.
+## 来源与溯源
 
-## Provenance
+种子样例来自赛事提供的 Sci-Evo 样例 PDF 与 JSON；新增 case 来自开放获取论文，并在数据中记录来源、许可状态和证据字段。公开发布前仍需逐条确认源材料许可。
 
-The seed case is derived from the competition-provided Sci-Evo sample PDF and JSON. Public release should be gated by source-license review.
+## 质量信号
 
-## Quality Signals
+- 必须通过 schema 校验。
+- 每个轨迹步骤必须具备证据指针。
+- 显式记录 `curation_level`。
+- 显式记录来源许可状态与是否需要许可复核。
+- 提供评测任务和提交就绪检查。
 
-- Required schema validation.
-- Page-level evidence pointers.
-- Explicit curation level.
-- License review flag.
+## 局限性
 
-## Limitations
+当前版本已经达到基础提交门槛，但仍属于冲刺版本。若要进一步提高竞争力，建议继续沿 `reports/VETTED_SOURCE_QUEUE.md` 扩展更多开放许可论文，并为每条新增 case 补齐 MinerU 本地解析产物。
 
-The current seed release contains one case and is intended as a submission scaffold. A competitive release should expand to at least 3 complete gold cases and include MinerU parsing artifacts for each source document.
+## 扩展入口
 
-## Expansion Readiness
-
-- Vetted source queue: `reports/VETTED_SOURCE_QUEUE.md`
-- Readiness report: `reports/SUBMISSION_READINESS.md`
-- Next safe processing step: download only PDFs whose license metadata is explicitly approved for local parsing.
+- 来源筛选队列：`reports/VETTED_SOURCE_QUEUE.md`
+- 提交就绪报告：`reports/SUBMISSION_READINESS.md`
+- 下一步安全操作：只下载许可信息明确允许本地处理的 PDF，并通过 MinerU 解析后再人工复核成 gold case。

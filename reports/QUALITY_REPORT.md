@@ -1,20 +1,20 @@
-# Sci-Evo-LabTrace Quality Report
+# Sci-Evo-LabTrace 质量报告
 
-## Summary
+## 概要
 
-- Cases: 3
-- Trajectory steps: 17
-- Evaluation tasks: 37
-- Expansion paper candidates: 25
-- Vetted OA sources: 25
-- Average evidence items per step: 1.41
-- Submission readiness report: present
+- Case 数量：3
+- 轨迹步骤数：17
+- 评测任务数：37
+- 扩展候选论文数：25
+- 已筛选开放来源数：25
+- 每步平均证据数：1.41
+- 提交就绪报告：已生成
 
-## Curation Levels
+## 标注等级
 
 - gold: 3
 
-## Action Distribution
+## 动作类型分布
 
 - analysis: 4
 - dry_experiment: 6
@@ -22,7 +22,7 @@
 - simulation: 2
 - wet_experiment: 4
 
-## Domain Tags
+## 领域标签
 
 - biocatalysis: 1
 - bioluminescence: 1
@@ -34,19 +34,19 @@
 - structural_biology: 1
 - synthetic_biology: 1
 
-## License Statuses
+## 来源许可状态
 
 - explicit_open_license_cc_by: 2
 - sample_from_competition_package_requires_review_before_public_release: 1
 
-## Vetted Source Queue
+## 开放来源筛选队列
 
 - blocked_until_license_verified: 6
 - needs_manual_rules_review: 5
 - permitted_for_local_processing: 14
 
-## Current Risks
+## 当前风险
 
-- Source license status must be reviewed before public release.
-- Only a subset of cases currently have local MinerU artifacts attached; additional OA papers should be parsed locally for the final package.
-- Additional vetted OA PDFs remain available if a larger final submission is needed.
+- 公开发布前仍需逐条复核来源许可状态。
+- 仅部分 case 已绑定本地 MinerU 解析产物；最终包可继续补齐开放论文解析结果。
+- 仍有已筛选开放论文可继续扩展，用于增强最终提交规模。

@@ -1,42 +1,36 @@
 # Sci-Evo-LabTrace
 
-Sci-Evo-LabTrace is a scientific evolution dataset for AI4S agents. The first
-release focuses on protein and enzyme design workflows, where papers often
-contain clear loops of goal setting, computational design, wet-lab validation,
-failure analysis, and iterative optimization.
+Sci-Evo-LabTrace 是面向 AI4S 科学智能体的科学演化数据集。当前版本聚焦蛋白设计、酶工程与合成生物学中的真实科研闭环：目标提出、计算设计、湿实验验证、失败/差距分析、迭代优化与最终指标确认。
 
-This repository is prepared for Track 1: "AGI4S Frontier Corpus". The dataset
-is designed as a Sci-Evo corpus rather than a static scientific QA set: each
-case records a traceable research trajectory from initial scientific objective
-to final verification.
+本项目用于“赛道一：语料筑基·AGI4S 前沿语料赛道”的 Sci-Evo 方向。它不是静态科学问答数据，而是把真实论文和实验叙事整理成可训练、可评测、可追溯的科研过程轨迹。
 
-## What Is Included
+## 内容结构
 
-- `data/processed/scievo_gold.jsonl`: curated Sci-Evo cases.
-- `schemas/scievo_case.schema.json`: field definitions for each case.
-- `scripts/build_dataset.py`: converts curated source records into the
-  submission JSONL format.
-- `scripts/validate_dataset.py`: validates required fields and trajectory
-  consistency.
-- `scripts/check_submission_readiness.py`: evaluates whether the repo is
-  actually ready to submit.
-- `scripts/vet_candidate_sources.py`: filters OA metadata into a
-  license-aware expansion queue.
-- `docs/TECHNICAL_REPORT.md`: technical report draft for submission.
-- `docs/VIDEO_SCRIPT.md`: short recording script.
-- `docs/SUBMISSION_CHECKLIST.md`: final packaging checklist.
+- `data/processed/scievo_gold.jsonl`：整理后的 Sci-Evo gold case。
+- `data/processed/scievo_eval_tasks.jsonl`：由 gold case 自动生成的评测任务。
+- `data/processed/vetted_open_access_sources.jsonl`：开放来源候选论文筛选队列。
+- `schemas/scievo_case.schema.json`：case 字段定义。
+- `scripts/build_dataset.py`：构建提交用 JSONL 数据集。
+- `scripts/validate_dataset.py`：校验必填字段与轨迹一致性。
+- `scripts/build_eval_tasks.py`：从轨迹数据生成评测任务。
+- `scripts/check_submission_readiness.py`：检查当前仓库是否达到可提交状态。
+- `scripts/vet_candidate_sources.py`：按许可信息筛选开放论文候选。
+- `docs/TECHNICAL_REPORT.md`：技术报告。
+- `docs/VIDEO_SCRIPT.md`：录屏讲稿。
+- `docs/SUBMISSION_CHECKLIST.md`：提交清单。
+- `reports/QUALITY_REPORT.md`：数据质量报告。
+- `reports/SUBMISSION_READINESS.md`：提交就绪报告。
 
-## Dataset Unit
+## 数据单元
 
-Each case describes one scientific research chain:
+每条 case 表示一条完整科研链路：
 
-1. Initial scientific request and measurable target.
-2. Multi-step agent trajectory, including dry experiments, wet experiments,
-   tool choices, parameters, observations, and iteration logic.
-3. Success verification, including metrics and final verdict.
-4. Evidence links back to source document pages, figures, tables, or text spans.
+1. 初始科研需求与可量化目标。
+2. 多步科研轨迹，包括干实验、湿实验、工具选择、参数、观察结果和迭代逻辑。
+3. 成功验证，包括验证方法、关键指标和最终结论。
+4. 证据链接，回溯到原始文档页面、段落、图、表或 MinerU 解析块。
 
-## Build
+## 构建与检查
 
 ```bash
 python3 scripts/build_dataset.py
@@ -47,45 +41,36 @@ python3 scripts/make_quality_report.py
 python3 scripts/check_submission_readiness.py
 ```
 
-The readiness script returns non-zero until the submission gates are met. The
-current hard blocker is dataset scale: the seed release has only one complete
-gold case, and this repo now treats `>=3` complete gold cases as the minimum
-credible submission threshold.
+`check_submission_readiness.py` 会在提交门槛未满足时返回非零状态。当前仓库把“至少 3 条完整 gold case”设为基础可提交门槛，并已经达到该门槛。
 
-## MinerU Usage
+## MinerU 使用
 
-The seed PDF has been parsed with the MinerU API. Normalized artifacts are stored
-under `data/interim/mineru/Sci-Evo-Sample/`, with the full image dump under
-`data/interim/mineru/extracted/images/`. The processed dataset keeps evidence
-fields that can point back to these MinerU artifacts.
+样例 PDF 已通过 MinerU API 完成解析。本地解析产物包括 Markdown、content list JSON、layout JSON、model JSON、图片和下载 zip。出于许可合规考虑，这些全量解析产物只保留在本地，不提交到公开 GitHub 仓库；公开仓库保留 MinerU 运行报告和可复现脚本。
 
-## Expansion Pipeline
+本地重新解析命令：
 
-Use `scripts/collect_openalex_candidates.py` to collect open-access metadata for
-future Sci-Evo cases:
+```bash
+python3 scripts/mineru_parse.py Sci-Evo-Sample.pdf --output-dir data/interim/mineru
+```
+
+## 扩展流程
+
+使用 `scripts/collect_openalex_candidates.py` 收集开放获取论文元数据：
 
 ```bash
 python3 scripts/collect_openalex_candidates.py --limit 25
 ```
 
-The script writes metadata only; it does not download PDFs. Candidate papers
-still require license review before public release or full-text processing.
-Run `scripts/vet_candidate_sources.py` after collection to prioritize only the
-papers whose license metadata is explicit enough for local MinerU parsing.
+该脚本只保存题名、DOI、开放获取状态、许可信息和 OA 链接，不下载全文。随后运行 `scripts/vet_candidate_sources.py`，优先筛选许可信息明确、适合本地 MinerU 解析和人工复核的候选论文。
 
-## Current Status
+## 当前状态
 
-- Dataset build/validation pipeline is in place and currently produces 3 gold
-  cases and 37 evaluation tasks.
-- MinerU usage is documented with local run artifacts for the seed paper, and
-  two additional gold cases are curated from explicit CC-BY open-access PDFs.
-- Submission docs, checklist, quality report, and readiness report are present.
-- The main remaining submission gate is repository hygiene: the final handoff
-  should be committed and packaged from a clean git status.
+- 数据构建与校验流程已就绪，当前生成 3 条 gold case 和 37 条评测任务。
+- 已记录 MinerU API 使用过程；赛事样例论文有本地解析产物。
+- 2 条新增 gold case 来自明确 CC-BY 的开放论文。
+- 技术报告、提交清单、质量报告、录屏讲稿和提交就绪报告均已准备。
+- 当前主要工作是最终打包、提交平台填写，以及按需继续扩充更多开放许可案例。
 
-## License
+## 许可说明
 
-Dataset records should only be released when the source material and derived
-annotations are compliant with the original license and competition rules. The
-recommended release license for original annotations is CC-BY-4.0, subject to
-source-license compatibility.
+数据记录只有在来源材料与派生标注均符合原始许可和比赛规则时才公开发布。原创标注推荐使用 CC-BY-4.0；对源论文全文、图片和 MinerU 全量解析产物，公开前必须单独完成许可复核。

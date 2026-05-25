@@ -100,20 +100,20 @@ def write_outputs(queue: list[dict]) -> None:
         counts[item["vetting_status"]] = counts.get(item["vetting_status"], 0) + 1
 
     with OUT_MD.open("w", encoding="utf-8") as f:
-        f.write("# Vetted Source Queue\n\n")
-        f.write("This queue is built from OpenAlex metadata only. It does not imply that the paper has already been downloaded, parsed, or curated into a gold Sci-Evo case.\n\n")
-        f.write("## Summary\n\n")
+        f.write("# 开放来源筛选队列\n\n")
+        f.write("该队列仅由 OpenAlex 元数据生成，不代表论文已经下载、解析或整理成 gold Sci-Evo case。\n\n")
+        f.write("## 概要\n\n")
         for status in [
             "permitted_for_local_processing",
             "needs_manual_rules_review",
             "blocked_until_license_verified",
         ]:
             f.write(f"- {status}: {counts.get(status, 0)}\n")
-        f.write("\n## Highest-Priority Papers\n\n")
+        f.write("\n## 高优先级论文\n\n")
         for item in queue[:10]:
             f.write(
                 f"- {item['title']} ({item.get('publication_year', 'n/a')}, {item.get('venue', 'n/a')}): "
-                f"{item['vetting_status']}; license={item.get('license') or 'missing'}; "
+                f"{item['vetting_status']}；license={item.get('license') or 'missing'}；"
                 f"next={item['next_step']}\n"
             )
 

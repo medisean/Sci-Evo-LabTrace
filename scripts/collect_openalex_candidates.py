@@ -92,7 +92,7 @@ def fetch_query(query: str, per_page: int) -> list[dict]:
                 "pdf_url": best_oa.get("pdf_url", ""),
                 "candidate_score": score,
                 "query": query,
-                "relevance_note": "Candidate for Sci-Evo extraction if paper contains explicit design/experiment/optimization loop.",
+                "relevance_note": "若论文包含明确的设计、实验或优化闭环，可作为 Sci-Evo 抽取候选。",
             }
         )
     return candidates

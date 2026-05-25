@@ -80,38 +80,38 @@ def main() -> int:
     ready = all(value for _, value in checks)
 
     lines = [
-        "# Submission Readiness",
+        "# 提交就绪报告",
         "",
-        "## Overall",
+        "## 总体状态",
         "",
-        f"- Ready to submit: {'yes' if ready else 'no'}",
-        f"- Gold cases: {gold_cases}",
-        f"- Total cases: {len(cases)}",
-        f"- Evaluation tasks: {len(tasks)}",
-        f"- Vetted OA candidates: {len(vetted)}",
-        f"- Manifest version: {manifest.get('version', 'missing')}",
+        f"- 是否可提交：{'是' if ready else '否'}",
+        f"- Gold case 数量：{gold_cases}",
+        f"- Case 总数：{len(cases)}",
+        f"- 评测任务数：{len(tasks)}",
+        f"- 已筛选 OA 候选数：{len(vetted)}",
+        f"- Manifest 版本：{manifest.get('version', 'missing')}",
         "",
-        "## Checks",
+        "## 检查项",
         "",
     ]
     for name, value in checks:
-        lines.append(f"- {name}: {'pass' if value else 'fail'}")
+        lines.append(f"- {name}: {'通过' if value else '未通过'}")
 
     lines.extend(
         [
             "",
-            "## Blocking Gaps",
+            "## 阻塞项",
             "",
         ]
     )
     if gold_cases < 3:
-        lines.append("- Fewer than 3 complete gold cases are present; first-place-quality expansion still needs more evidence-backed papers.")
+        lines.append("- 完整 gold case 少于 3 条；若要冲击高排名，还需要更多带证据链的论文案例。")
     if not bool(vetted):
-        lines.append("- No vetted open-access candidate queue is available yet.")
+        lines.append("- 尚未生成开放获取候选论文筛选队列。")
     if not git_is_clean():
-        lines.append("- Worktree is not clean.")
+        lines.append("- Git 工作区尚未清理。")
     if ready:
-        lines.append("- No blocking gaps detected.")
+        lines.append("- 未发现阻塞项。")
 
     OUT.parent.mkdir(parents=True, exist_ok=True)
     OUT.write_text("\n".join(lines) + "\n", encoding="utf-8")

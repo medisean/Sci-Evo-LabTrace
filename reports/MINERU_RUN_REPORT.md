@@ -1,16 +1,16 @@
-# MinerU Run Report
+# MinerU 运行报告
 
-## Summary
+## 概要
 
-- Input file: `Sci-Evo-Sample.pdf`
-- API mode: MinerU batch API
-- Model version: `vlm`
-- Formula parsing: enabled
-- Table parsing: enabled
-- Final state: `done`
-- Local output directory: `data/interim/mineru/`
+- 输入文件：`Sci-Evo-Sample.pdf`
+- API 模式：MinerU batch API
+- 模型版本：`vlm`
+- 公式解析：已开启
+- 表格解析：已开启
+- 最终状态：`done`
+- 本地输出目录：`data/interim/mineru/`
 
-## Generated Local Artifacts
+## 本地生成产物
 
 - `batch_create_response.json`
 - `batch_status.json`
@@ -27,8 +27,6 @@
 - `Sci-Evo-Sample/layout.json`
 - `Sci-Evo-Sample/model.json`
 
-## Publication Note
+## 公开发布说明
 
-The full MinerU output is kept local for submission packaging and verification.
-It is not committed to the public repository until the source license is
-reviewed.
+完整 MinerU 输出保留在本地，用于提交打包和复核。由于源 PDF 的公开许可仍需确认，这些全文级解析产物不会提交到公开 GitHub 仓库。
