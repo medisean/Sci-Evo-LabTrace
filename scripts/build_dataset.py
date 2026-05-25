@@ -119,6 +119,45 @@ EVIDENCE_BY_STEP = {
 }
 
 
+REQUIRED_TOP_LEVEL = [
+    "case_id",
+    "dataset_version",
+    "sci_evo_type",
+    "domain",
+    "source",
+    "initial_request",
+    "agent_trajectory",
+    "success_verification",
+    "quality",
+]
+
+REQUIRED_INITIAL = [
+    "target_name",
+    "input_data",
+    "user_intent",
+    "quantifiable_goal",
+]
+
+REQUIRED_STEP = [
+    "step_index",
+    "phase",
+    "thought",
+    "action",
+    "tool",
+    "parameters",
+    "observation",
+    "outcome_type",
+    "valid",
+    "evidence",
+]
+
+REQUIRED_VERIFICATION = [
+    "validation_technique",
+    "metrics",
+    "final_verdict",
+]
+
+
 def load_source_case() -> dict:
     with SOURCE_JSON.open("r", encoding="utf-8") as f:
         return json.load(f)
@@ -260,13 +299,82 @@ def build_cases() -> list[dict]:
     return cases
 
 
+def validate_case(case: dict, line_no: int) -> list[str]:
+    errors: list[str] = []
+    prefix = f"line {line_no} case {case.get('case_id', '<missing>')}"
+
+    for field in REQUIRED_TOP_LEVEL:
+        if field not in case:
+            errors.append(f"{prefix}: missing top-level field {field}")
+    if errors:
+        return errors
+
+    if case["sci_evo_type"] != "scientific_evolution_trace":
+        errors.append(f"{prefix}: unexpected sci_evo_type")
+    if not isinstance(case["domain"], list) or not case["domain"]:
+        errors.append(f"{prefix}: domain must be non-empty list")
+
+    source = case["source"]
+    for field in ["title", "document_path", "license_status"]:
+        if not source.get(field):
+            errors.append(f"{prefix}: source.{field} is required")
+
+    initial = case["initial_request"]
+    for field in REQUIRED_INITIAL:
+        if not initial.get(field):
+            errors.append(f"{prefix}: initial_request.{field} is required")
+
+    steps = case["agent_trajectory"]
+    if not isinstance(steps, list) or not steps:
+        errors.append(f"{prefix}: agent_trajectory must be non-empty")
+    else:
+        expected_index = 1
+        for step in steps:
+            for field in REQUIRED_STEP:
+                if field not in step:
+                    errors.append(f"{prefix}: step missing {field}")
+            if step.get("step_index") != expected_index:
+                errors.append(f"{prefix}: step_index should be {expected_index}")
+            expected_index += 1
+            if not isinstance(step.get("parameters"), dict):
+                errors.append(f"{prefix}: step parameters must be object")
+            tool = step.get("tool", {})
+            if not isinstance(tool, dict) or not tool.get("name"):
+                errors.append(f"{prefix}: step tool.name is required")
+            evidence = step.get("evidence")
+            if not isinstance(evidence, list) or not evidence:
+                errors.append(f"{prefix}: step evidence is required")
+
+    verification = case["success_verification"]
+    for field in REQUIRED_VERIFICATION:
+        if not verification.get(field):
+            errors.append(f"{prefix}: success_verification.{field} is required")
+
+    quality = case["quality"]
+    coverage = quality.get("evidence_coverage")
+    if not isinstance(coverage, (int, float)) or not 0 <= coverage <= 1:
+        errors.append(f"{prefix}: quality.evidence_coverage must be 0..1")
+    if quality.get("curation_level") not in {"gold", "silver"}:
+        errors.append(f"{prefix}: quality.curation_level invalid")
+
+    return errors
+
+
+def dataset_is_valid(cases: list[dict]) -> bool:
+    errors: list[str] = []
+    for idx, case in enumerate(cases, 1):
+        errors.extend(validate_case(case, idx))
+    return not errors
+
+
 def build_manifest(cases: list[dict]) -> dict:
     gold = sum(1 for case in cases if case["quality"]["curation_level"] == "gold")
     silver = sum(1 for case in cases if case["quality"]["curation_level"] == "silver")
     license_review_needed = sum(1 for case in cases if case["quality"].get("requires_license_review"))
     mineru_cases = sum(1 for case in cases if case.get("source", {}).get("mineru_artifact"))
+    dataset_validated = dataset_is_valid(cases)
     readiness = {
-        "dataset_jsonl_validated": False,
+        "dataset_jsonl_validated": dataset_validated,
         "minimum_complete_gold_cases": gold >= 3,
         "mineru_usage_documented": True,
         "docs_complete": all(path.exists() and path.stat().st_size > 0 for path in [README_FILE, TECH_REPORT, CHECKLIST, VIDEO_SCRIPT]),

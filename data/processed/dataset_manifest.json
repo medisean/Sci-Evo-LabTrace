@@ -16,7 +16,7 @@
     "data/curated/cases/*.json"
   ],
   "readiness": {
-    "dataset_jsonl_validated": false,
+    "dataset_jsonl_validated": true,
     "minimum_complete_gold_cases": true,
     "mineru_usage_documented": true,
     "docs_complete": true,

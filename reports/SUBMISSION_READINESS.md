@@ -2,7 +2,7 @@
 
 ## Overall
 
-- Ready to submit: yes
+- Ready to submit: no
 - Gold cases: 3
 - Total cases: 3
 - Evaluation tasks: 37
@@ -20,8 +20,8 @@
 - evaluation_tasks_generated: pass
 - docs_complete: pass
 - source_license_risks_explicit: pass
-- git_clean: pass
+- git_clean: fail
 
 ## Blocking Gaps
 
-- No blocking gaps detected.
+- Worktree is not clean.
