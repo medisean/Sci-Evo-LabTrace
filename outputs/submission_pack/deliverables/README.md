@@ -1,13 +1,13 @@
-# Sci-Evo 提交包
+# Sci-Evo 评审材料
 
-本目录包含离线提交所需的核心交付件：
+本目录包含项目评审所需的核心材料：
 
-- `scievo_competition_pitch.pptx`：参考 EduMiner 提交稿风格重写的 Sci-Evo 展示 PPT。
+- `scievo_labtrace_overview.pptx`：参考 EduMiner 演示稿风格重写的 Sci-Evo 展示 PPT。
 - `data/processed/`：gold 数据集、评测任务、manifest 和开放来源筛选结果。
-- `docs/`：技术报告、数据集卡片、提交清单和录屏讲稿。
-- `reports/`：质量报告、MinerU 运行报告、提交就绪报告和来源筛选队列。
+- `docs/`：技术报告、数据集卡片、材料清单和录屏讲稿。
+- `reports/`：质量报告、MinerU 运行报告、完整性检查报告和来源筛选队列。
 - `schemas/`：Sci-Evo case schema。
-- `scripts/`：构建、校验、评测任务生成、质量报告和提交就绪检查脚本。
+- `scripts/`：构建、校验、评测任务生成、质量报告和完整性检查脚本。
 
 说明：
 

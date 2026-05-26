@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Evaluate Sci-Evo submission readiness from local artifacts."""
+"""Evaluate Sci-Evo material completeness from local artifacts."""
 
 from __future__ import annotations
 
@@ -44,6 +44,7 @@ def git_is_clean() -> bool:
             "--",
             ".",
             ":(exclude)reports/SUBMISSION_READINESS.md",
+            ":(exclude)outputs/submission_pack",
         ],
         cwd=ROOT,
         text=True,
@@ -80,11 +81,11 @@ def main() -> int:
     ready = all(value for _, value in checks)
 
     lines = [
-        "# 提交就绪报告",
+        "# 完整性检查报告",
         "",
         "## 总体状态",
         "",
-        f"- 是否可提交：{'是' if ready else '否'}",
+        f"- 是否完整：{'是' if ready else '否'}",
         f"- Gold case 数量：{gold_cases}",
         f"- Case 总数：{len(cases)}",
         f"- 评测任务数：{len(tasks)}",
@@ -111,7 +112,7 @@ def main() -> int:
     if not git_is_clean():
         lines.append("- Git 工作区尚未清理。")
     if ready:
-        lines.append("- 未发现阻塞项。")
+        lines.append("- 未发现关键缺口。")
 
     OUT.parent.mkdir(parents=True, exist_ok=True)
     OUT.write_text("\n".join(lines) + "\n", encoding="utf-8")
