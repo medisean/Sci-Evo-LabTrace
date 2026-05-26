@@ -1,4 +1,4 @@
-# 提交清单
+# 材料清单
 
 ## 必交
 
@@ -22,7 +22,7 @@
 - [x] 评测任务：`data/processed/scievo_eval_tasks.jsonl`。
 - [x] 扩展版 gold cases。
 - [x] 简单 benchmark/evaluation tasks。
-- [x] 提交就绪检查：`reports/SUBMISSION_READINESS.md`。
+- [x] 完整性检查：`reports/SUBMISSION_READINESS.md`。
 - [x] 开放来源筛选队列：`reports/VETTED_SOURCE_QUEUE.md`。
 
 ## 截止前最终检查
@@ -31,7 +31,7 @@
 - [x] `python3 scripts/validate_dataset.py data/processed/scievo_gold.jsonl` 成功。
 - [x] `python3 scripts/build_eval_tasks.py` 成功。
 - [ ] `python3 scripts/vet_candidate_sources.py` 成功。
-- [ ] `python3 scripts/check_submission_readiness.py` 仅在真正可提交时通过。
+- [ ] `python3 scripts/check_submission_readiness.py` 仅在关键材料完整时通过。
 - [ ] README 中能讲清楚数据集用途。
 - [ ] 技术报告中能对应五个评分维度。
 - [ ] 不提交 `mineru-api-token.txt`。

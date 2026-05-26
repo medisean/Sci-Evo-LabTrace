@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Build the Sci-Evo submission PPT and offline deliverables package."""
+"""Build the Sci-Evo review deck and offline materials package."""
 
 from __future__ import annotations
 
@@ -16,9 +16,9 @@ ROOT = Path(__file__).resolve().parents[1]
 REFERENCE_PPT = Path("/Users/liangming/Documents/mineru-question3/outputs/submission_pack/deliverables/eduminer_competition_pitch.pptx")
 OUT_ROOT = ROOT / "outputs" / "submission_pack"
 DELIVERABLES = OUT_ROOT / "deliverables"
-PPT_OUT = DELIVERABLES / "scievo_competition_pitch.pptx"
-SUMMARY_IMAGE = OUT_ROOT / "assets" / "submission_pack_overview.png"
-ZIP_OUT = OUT_ROOT / "scievo_submission_pack.zip"
+PPT_OUT = DELIVERABLES / "scievo_labtrace_overview.pptx"
+SUMMARY_IMAGE = OUT_ROOT / "assets" / "review_materials_overview.png"
+ZIP_OUT = OUT_ROOT / "scievo_labtrace_review_materials.zip"
 
 
 SLIDE_TEXT = {
@@ -56,10 +56,10 @@ SLIDE_TEXT = {
         15: "即使能读 PDF，也常停留在段落摘录，难以回溯到页面、图表和具体实验节点。",
         16: "→",
         18: "03",
-        19: "提交成本高",
+        19: "审查成本高",
         20: "数据、报告、评测任务和许可说明分散，评委很难快速确认工程完整度。",
-        22: "比赛得分点",
-        23: "高保真解析只是底座；更关键的是把科研轨迹、证据链、质量控制和提交包做成闭环。",
+        22: "核心判断",
+        23: "高保真解析只是底座；更关键的是把科研轨迹、证据链、质量控制和评测机制做成闭环。",
     },
     3: {
         3: "系统架构",
@@ -78,12 +78,12 @@ SLIDE_TEXT = {
         20: "抽取",
         21: "trajectory / verification",
         22: "→",
-        24: "交付",
+        24: "产出",
         25: "JSONL / tasks / reports",
         27: "统一证据链",
         28: "每个轨迹步骤保留来源页码、定位文本和 MinerU block 对应关系。",
-        30: "统一提交闭环",
-        31: "构建、校验、质量报告、就绪检查和打包脚本共同保证可提交性。",
+        30: "统一工程闭环",
+        31: "构建、校验、质量报告和一致性检查共同保证材料可复核、可扩展。",
     },
     4: {
         3: "MINERU 解析",
@@ -122,7 +122,7 @@ SLIDE_TEXT = {
         18: "de_novo_luciferase",
         20: "生物发光",
         22: "从头设计 + 筛选",
-        24: "赛事样例",
+        24: "种子样例",
         26: "目标、突变、细胞验证",
         28: "ml_enzyme_opt",
         30: "酶工程",
@@ -166,21 +166,21 @@ SLIDE_TEXT = {
         27: "同一篇论文的切分方式会直接影响样本质量；我们的原则是先定边界，再抽步骤，再做证据绑定。",
     },
     7: {
-        3: "提交交付",
-        4: "一次打包交出数据、报告、脚本和审查说明，而不是零散文件。",
+        3: "工程体系",
+        4: "数据、报告、脚本和说明材料需要放在同一个清晰结构里。",
         5: "Sci-Evo · LabTrace",
         6: "07",
-        8: "submission_pack/",
-        9: "记录数据、文档、报告与交付清单路径",
+        8: "项目目录",
+        9: "数据、文档、报告与脚本按统一结构组织",
         11: "数据",
         12: "scievo_gold.jsonl / scievo_eval_tasks.jsonl",
         14: "文档",
         15: "README.md / TECHNICAL_REPORT.md",
-        17: "校验",
-        18: "validate_dataset.py / check_submission_readiness.py",
-        20: "报告",
-        21: "QUALITY_REPORT.md / MINERU_RUN_REPORT.md / SUBMISSION_READINESS.md",
-        30: "对评委：打开包就能复核。对团队：后续扩展 case 时不用重搭提交结构。",
+        17: "报告",
+        18: "QUALITY_REPORT.md / MINERU_RUN_REPORT.md",
+        20: "工具",
+        21: "build_dataset.py / validate_dataset.py",
+        30: "核心材料彼此可互相印证：数据能被脚本校验，报告能回到来源与指标。",
     },
     8: {
         3: "质量闭环",
@@ -194,19 +194,19 @@ SLIDE_TEXT = {
         14: "25",
         15: "开放来源已筛选",
         17: "100%",
-        18: "提交门槛已满足",
+        18: "核心材料完备",
         20: "许可状态",
         21: "CC-BY 2 / 样例待复核 1",
         23: "质量报告",
         24: "已生成",
-        26: "就绪检查",
+        26: "一致性检查",
         27: "通过",
         29: "自动审校",
-        31: "validate_dataset 通过；check_submission_readiness 通过。",
+        31: "结构校验通过；一致性检查通过。",
     },
     9: {
-        3: "提交包",
-        4: "评委打开交付包，先看到核心材料，再顺着文件路径进入证据与代码。",
+        3: "项目概览",
+        4: "先看核心事实，再顺着材料路径进入证据与代码。",
         5: "Sci-Evo · LabTrace",
         6: "09",
         10: "首屏讲清楚三件事",
@@ -214,18 +214,18 @@ SLIDE_TEXT = {
         12: "gold / eval / manifest",
         13: "关键文档",
         14: "README / 技术报告 / 清单",
-        15: "验证状态",
+        15: "验证结果",
         16: "校验通过 / 工作区干净",
-        17: "许可说明",
+        17: "许可边界",
         18: "公开发布前复核全文级产物",
     },
     10: {
-        3: "冲刺路线",
-        4: "当前版本已可提交，后续增强应集中在规模、MinerU 覆盖和许可清晰度。",
+        3: "后续增强",
+        4: "当前版本已具备完整评审材料，后续增强应集中在规模、MinerU 覆盖和许可清晰度。",
         5: "Sci-Evo · LabTrace",
         6: "10",
         8: "P0",
-        9: "提交版交付包",
+        9: "完整基础版本",
         10: "当前已完成；PPT、数据、报告与校验链齐全。",
         12: "P1",
         13: "扩展更多 OA case",
@@ -236,7 +236,7 @@ SLIDE_TEXT = {
         20: "P3",
         21: "公开版合规",
         22: "逐条确认全文、图片和解析产物的许可边界。",
-        24: "答辩话术：MinerU 负责把论文变成可信结构化证据，Sci-Evo-LabTrace 负责把证据组织成可训练、可评测、可提交的科研演化数据。",
+        24: "总结：MinerU 负责把论文变成可信结构化证据，Sci-Evo-LabTrace 负责把证据组织成可训练、可评测、可复核的科研演化数据。",
     },
 }
 
@@ -278,8 +278,8 @@ def make_overview_image() -> None:
 
     draw.rounded_rectangle((48, 48, 1232, 672), radius=28, fill="#FFFFFF", outline="#D6D0C5", width=2)
     draw.rounded_rectangle((84, 84, 400, 184), radius=18, fill="#E8F0FF")
-    draw.text((108, 110), "Sci-Evo 提交包概览", fill="#172033", font=title_font)
-    draw.text((108, 138), "数据、文档、报告、脚本一包可审", fill="#2563EB", font=body_font)
+    draw.text((108, 110), "Sci-Evo 项目概览", fill="#172033", font=title_font)
+    draw.text((108, 138), "数据、文档、报告、脚本在同一结构中可复核", fill="#2563EB", font=body_font)
 
     sections = [
         ("数据文件", ["scievo_gold.jsonl", "scievo_eval_tasks.jsonl", "dataset_manifest.json"], "#EAF6FF"),
@@ -298,7 +298,7 @@ def make_overview_image() -> None:
     draw.rounded_rectangle((92, 616, 1188, 652), radius=12, fill="#172033")
     draw.text(
         (112, 626),
-        "状态：3 个 gold case / 37 个评测任务 / 就绪检查通过 / 工作区干净",
+        "状态：3 个 gold case / 37 个评测任务 / 一致性检查通过 / 工作区干净",
         fill="#FFFFFF",
         font=body_font,
     )
@@ -343,16 +343,16 @@ def copy_tree_items() -> None:
     readme.write_text(
         "\n".join(
             [
-                "# Sci-Evo 提交包",
+                "# Sci-Evo 评审材料",
                 "",
-                "本目录包含离线提交所需的核心交付件：",
+                "本目录包含项目评审所需的核心材料：",
                 "",
-                "- `scievo_competition_pitch.pptx`：参考 EduMiner 提交稿风格重写的 Sci-Evo 展示 PPT。",
+                "- `scievo_labtrace_overview.pptx`：参考 EduMiner 演示稿风格重写的 Sci-Evo 展示 PPT。",
                 "- `data/processed/`：gold 数据集、评测任务、manifest 和开放来源筛选结果。",
-                "- `docs/`：技术报告、数据集卡片、提交清单和录屏讲稿。",
-                "- `reports/`：质量报告、MinerU 运行报告、提交就绪报告和来源筛选队列。",
+                "- `docs/`：技术报告、数据集卡片、材料清单和录屏讲稿。",
+                "- `reports/`：质量报告、MinerU 运行报告、完整性检查报告和来源筛选队列。",
                 "- `schemas/`：Sci-Evo case schema。",
-                "- `scripts/`：构建、校验、评测任务生成、质量报告和提交就绪检查脚本。",
+                "- `scripts/`：构建、校验、评测任务生成、质量报告和完整性检查脚本。",
                 "",
                 "说明：",
                 "",

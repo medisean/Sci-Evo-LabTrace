@@ -20,11 +20,11 @@
 
 ## 5. 工程与质量控制
 
-仓库提供构建脚本、验证脚本和提交就绪检查。运行 `python3 scripts/build_dataset.py` 可以生成 JSONL 数据集，运行 `python3 scripts/validate_dataset.py data/processed/scievo_gold.jsonl` 可以检查字段完整性和轨迹一致性，运行 `python3 scripts/check_submission_readiness.py` 可以统一检查样本数、文档、质量报告、MinerU 记录和 Git 状态。
+仓库提供构建脚本、验证脚本和完整性检查。运行 `python3 scripts/build_dataset.py` 可以生成 JSONL 数据集，运行 `python3 scripts/validate_dataset.py data/processed/scievo_gold.jsonl` 可以检查字段完整性和轨迹一致性，运行 `python3 scripts/check_submission_readiness.py` 可以统一检查样本数、文档、质量报告、MinerU 记录和 Git 状态。
 
 ## 6. 当前冲刺状态
 
-当前版本已经具备完整提交流程，并形成了 3 条完整 gold case、37 条自动生成评测任务，以及开放来源筛选队列。当前剩余的正式提交门槛主要是最终打包和 Git 工作区清理；如果继续冲击更高排名，可以沿着 `reports/VETTED_SOURCE_QUEUE.md` 继续扩展更多开放许可案例，并补齐对应的 MinerU 本地解析产物。
+当前版本已经具备完整材料体系，并形成了 3 条完整 gold case、37 条自动生成评测任务，以及开放来源筛选队列。当前剩余工作主要是最终材料整理和 Git 工作区清理；如果继续冲击更高排名，可以沿着 `reports/VETTED_SOURCE_QUEUE.md` 继续扩展更多开放许可案例，并补齐对应的 MinerU 本地解析产物。
 
 ## 7. 结尾
 

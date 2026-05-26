@@ -33,14 +33,14 @@ JSON Lines。每一行是一条完整科学演化 case。
 - 每个轨迹步骤必须具备证据指针。
 - 显式记录 `curation_level`。
 - 显式记录来源许可状态与是否需要许可复核。
-- 提供评测任务和提交就绪检查。
+- 提供评测任务和完整性检查。
 
 ## 局限性
 
-当前版本已经达到基础提交门槛，但仍属于冲刺版本。若要进一步提高竞争力，建议继续沿 `reports/VETTED_SOURCE_QUEUE.md` 扩展更多开放许可论文，并为每条新增 case 补齐 MinerU 本地解析产物。
+当前版本已经达到基础完整度门槛，但仍属于冲刺版本。若要进一步提高竞争力，建议继续沿 `reports/VETTED_SOURCE_QUEUE.md` 扩展更多开放许可论文，并为每条新增 case 补齐 MinerU 本地解析产物。
 
 ## 扩展入口
 
 - 来源筛选队列：`reports/VETTED_SOURCE_QUEUE.md`
-- 提交就绪报告：`reports/SUBMISSION_READINESS.md`
+- 完整性检查报告：`reports/SUBMISSION_READINESS.md`
 - 下一步安全操作：只下载许可信息明确允许本地处理的 PDF，并通过 MinerU 解析后再人工复核成 gold case。

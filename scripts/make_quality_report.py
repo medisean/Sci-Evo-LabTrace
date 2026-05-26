@@ -71,7 +71,7 @@ def main() -> None:
         f.write(f"- 扩展候选论文数：{candidate_count}\n")
         f.write(f"- 已筛选开放来源数：{len(vetted)}\n")
         f.write(f"- 每步平均证据数：{avg_evidence:.2f}\n")
-        f.write(f"- 提交就绪报告：{'已生成' if READINESS.exists() else '缺失'}\n")
+        f.write(f"- 完整性检查报告：{'已生成' if READINESS.exists() else '缺失'}\n")
         f.write("\n## 标注等级\n\n")
         for name, count in sorted(curation.items()):
             f.write(f"- {name}: {count}\n")
