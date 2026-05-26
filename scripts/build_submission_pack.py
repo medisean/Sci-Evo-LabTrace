@@ -10,6 +10,8 @@ from pathlib import Path
 
 from PIL import Image, ImageDraw, ImageFont
 from pptx import Presentation
+from pptx.dml.color import RGBColor
+from pptx.enum.dml import MSO_COLOR_TYPE
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -21,12 +23,56 @@ SUMMARY_IMAGE = OUT_ROOT / "assets" / "review_materials_overview.png"
 ZIP_OUT = OUT_ROOT / "scievo_labtrace_review_materials.zip"
 
 
+TEXT_COLOR_OVERRIDES = {
+    1: {
+        20: "F8FAFC",
+        21: "E5E7EB",
+        22: "C7D2FE",
+        23: "F8FAFC",
+    },
+    7: {
+        8: "F8FAFC",
+        9: "E5E7EB",
+    },
+    9: {
+        10: "F8FAFC",
+        11: "CBD5E1",
+        12: "F8FAFC",
+        13: "CBD5E1",
+        14: "F8FAFC",
+        15: "CBD5E1",
+        16: "F8FAFC",
+        17: "CBD5E1",
+        18: "F8FAFC",
+    },
+    10: {
+        3: "F8FAFC",
+        4: "E5E7EB",
+        5: "CBD5E1",
+        6: "CBD5E1",
+        8: "C7D2FE",
+        9: "F8FAFC",
+        10: "CBD5E1",
+        12: "C7D2FE",
+        13: "F8FAFC",
+        14: "CBD5E1",
+        16: "FBBF24",
+        17: "F8FAFC",
+        18: "CBD5E1",
+        20: "FCA5A5",
+        21: "F8FAFC",
+        22: "CBD5E1",
+        24: "F8FAFC",
+    },
+}
+
+
 SLIDE_TEXT = {
     1: {
         2: "MinerU · Sci-Evo",
         3: "Sci-Evo-LabTrace",
-        4: "面向 AI4S 科学智能体的科研演化证据数据集",
-        5: "把论文 PDF、MinerU 解析结果和人工证据链整合成可训练、可评测、可追溯的 Sci-Evo gold case。",
+        4: "从论文 PDF 到可训练科研轨迹的数据集",
+        5: "一句话：用 MinerU 把论文拆成可追溯证据，再整理成科学智能体能学习和评测的科研过程。",
         8: "3",
         9: "Gold case",
         11: "17",
@@ -35,35 +81,35 @@ SLIDE_TEXT = {
         15: "评测任务",
         17: "25",
         18: "OA 候选",
-        20: "不是“论文摘要”",
-        21: "而是把真实科研中的目标设定、计算设计、湿实验、失败修正和最终验证整理成可学习的轨迹。",
+        20: "一条主线",
+        21: "论文不是终点；可复核的过程轨迹才是训练科学智能体的资产。",
         22: "核心差异",
-        23: "论文证据链 + MinerU 块级定位 + 结构化 schema + 自动评测任务",
+        23: "证据先行 → 轨迹抽取 → 评测生成 → 质量闭环",
         24: "Sci-Evo · LabTrace",
         25: "01",
     },
     2: {
-        3: "场景痛点",
-        4: "真正稀缺的不是论文数量，而是可复用的科研演化过程。",
+        3: "目录",
+        4: "评委可以按四个问题阅读这份材料。",
         5: "Sci-Evo · LabTrace",
         6: "02",
         8: "01",
-        9: "静态知识多",
-        10: "现有语料大多只保留结论、摘要或问答，缺少真实科研步骤与决策上下文。",
+        9: "为什么需要",
+        10: "论文结论很多，但可学习的科研过程数据仍然稀缺。",
         11: "→",
         13: "02",
-        14: "证据链断",
-        15: "即使能读 PDF，也常停留在段落摘录，难以回溯到页面、图表和具体实验节点。",
+        14: "证据怎么来",
+        15: "MinerU 把 PDF 转成 Markdown、layout 和块级证据。",
         16: "→",
         18: "03",
-        19: "审查成本高",
-        20: "数据、报告、评测任务和许可说明分散，评委很难快速确认工程完整度。",
-        22: "核心判断",
-        23: "高保真解析只是底座；更关键的是把科研轨迹、证据链、质量控制和评测机制做成闭环。",
+        19: "如何被验证",
+        20: "Schema、gold case、评测任务和报告共同证明质量。",
+        22: "阅读主线",
+        23: "问题定义 → MinerU 证据 → 数据结构 → 质量验证 → 后续扩展。",
     },
     3: {
-        3: "系统架构",
-        4: "先把论文解析成可信证据，再构建科研轨迹数据。",
+        3: "主线架构",
+        4: "先把论文变成可信证据，再把证据组织成科研轨迹。",
         5: "Sci-Evo · LabTrace",
         6: "03",
         8: "输入",
@@ -86,8 +132,8 @@ SLIDE_TEXT = {
         31: "构建、校验、质量报告和一致性检查共同保证材料可复核、可扩展。",
     },
     4: {
-        3: "MINERU 解析",
-        4: "第一公里有真实落地：本地产物、页级证据和复现实验路径都可检查。",
+        3: "证据来源",
+        4: "MinerU 不是展示点，而是每条轨迹可追溯的第一公里。",
         5: "Sci-Evo · LabTrace",
         6: "04",
         8: "1",
@@ -96,22 +142,22 @@ SLIDE_TEXT = {
         12: "核心产物类型",
         14: "100%",
         15: "样例可复查",
-        17: "本地运行报告已保存",
-        18: "输入样例",
-        19: "Sci-Evo-Sample.pdf",
-        20: "产物覆盖",
-        21: "full.md / layout.json / content_list",
-        22: "关键文件",
-        23: "markdown / json / model / images",
-        24: "许可边界",
-        25: "全文级解析产物仅本地保留",
-        26: "后续扩展",
-        27: "开放论文可继续补齐本地 MinerU 解析结果",
-        28: "使用方式：通过 scripts/mineru_parse.py 调用 MinerU API，本地保留 Markdown、content list、layout、model 与图片；因许可约束，不公开未复核全文级产物。",
+        17: "MinerU 本地产物",
+        18: "输入",
+        19: "样例 PDF",
+        20: "产物",
+        21: "md / layout",
+        22: "证据",
+        23: "页码 / block",
+        24: "边界",
+        25: "全文本地留存",
+        26: "扩展",
+        27: "开放论文补解析",
+        28: "复核方式：关键字段回到 PDF 页面、Markdown 段落或 layout 块；全文级产物因许可仅本地留存。",
     },
     5: {
-        3: "数据总览",
-        4: "每条 case 同时呈现领域、轨迹重心、许可状态和关键证据。",
+        3: "数据内容",
+        4: "当前 3 条 gold case 覆盖样例、开放论文和后续候选队列。",
         5: "Sci-Evo · LabTrace",
         6: "05",
         8: "样本",
@@ -142,8 +188,8 @@ SLIDE_TEXT = {
         57: "这张表让评委可以在一页内看清当前数据覆盖、来源合规性和后续扩展空间。",
     },
     6: {
-        3: "标注策略",
-        4: "目标定义不只写摘要，而是决定轨迹边界、验证标准和评测方式。",
+        3: "标注结构",
+        4: "每条 case 都按“目标、过程、验证、质量”四层组织。",
         5: "Sci-Evo · LabTrace",
         6: "06",
         8: "case 画像",
@@ -167,24 +213,24 @@ SLIDE_TEXT = {
     },
     7: {
         3: "工程体系",
-        4: "数据、报告、脚本和说明材料需要放在同一个清晰结构里。",
+        4: "评委从项目目录就能进入数据、报告、脚本和证据。",
         5: "Sci-Evo · LabTrace",
         6: "07",
         8: "项目目录",
-        9: "数据、文档、报告与脚本按统一结构组织",
+        9: "数据 / 文档 / 报告 / 脚本",
         11: "数据",
-        12: "scievo_gold.jsonl / scievo_eval_tasks.jsonl",
+        12: "Gold JSONL / Eval tasks",
         14: "文档",
-        15: "README.md / TECHNICAL_REPORT.md",
+        15: "README / 技术报告",
         17: "报告",
-        18: "QUALITY_REPORT.md / MINERU_RUN_REPORT.md",
+        18: "质量报告 / MinerU 报告",
         20: "工具",
-        21: "build_dataset.py / validate_dataset.py",
+        21: "build / validate",
         30: "核心材料彼此可互相印证：数据能被脚本校验，报告能回到来源与指标。",
     },
     8: {
-        3: "质量闭环",
-        4: "每个 case 通过结构校验后，还要被证据、许可和评测任务反向约束。",
+        3: "质量验证",
+        4: "质量不是口头承诺，而是由校验脚本、评测任务和报告共同约束。",
         5: "Sci-Evo · LabTrace",
         6: "08",
         8: "3/3",
@@ -203,30 +249,31 @@ SLIDE_TEXT = {
         27: "通过",
         29: "自动审校",
         31: "结构校验通过；一致性检查通过。",
+        32: "校验覆盖：数据结构、评测任务、质量报告、许可状态与 Git 状态。",
     },
     9: {
-        3: "项目概览",
-        4: "先看核心事实，再顺着材料路径进入证据与代码。",
+        3: "快速复核",
+        4: "先看核心事实，再沿着文件路径进入证据、报告和代码。",
         5: "Sci-Evo · LabTrace",
         6: "09",
         10: "首屏讲清楚三件事",
-        11: "数据文件",
+        11: "数据",
         12: "gold / eval / manifest",
-        13: "关键文档",
-        14: "README / 技术报告 / 清单",
-        15: "验证结果",
-        16: "校验通过 / 工作区干净",
-        17: "许可边界",
-        18: "公开发布前复核全文级产物",
+        13: "文档",
+        14: "README / 技术报告",
+        15: "验证",
+        16: "校验通过",
+        17: "边界",
+        18: "许可复核说明",
     },
     10: {
         3: "后续增强",
-        4: "当前版本已具备完整评审材料，后续增强应集中在规模、MinerU 覆盖和许可清晰度。",
+        4: "基础版本已经完整；后续增强集中在规模、MinerU 覆盖和许可清晰度。",
         5: "Sci-Evo · LabTrace",
         6: "10",
         8: "P0",
         9: "完整基础版本",
-        10: "当前已完成；PPT、数据、报告与校验链齐全。",
+        10: "当前已完成；数据、报告、PPT 与校验链齐全。",
         12: "P1",
         13: "扩展更多 OA case",
         14: "优先处理 14 条 permitted_for_local_processing 候选。",
@@ -308,11 +355,63 @@ def make_overview_image() -> None:
 def set_shape_text(shape, text: str) -> None:
     if not shape.has_text_frame:
         return
-    shape.text = text
+    text_frame = shape.text_frame
+    paragraph = text_frame.paragraphs[0] if text_frame.paragraphs else None
+    run = next((candidate for para in text_frame.paragraphs for candidate in para.runs), None)
+
+    style = {
+        "alignment": paragraph.alignment if paragraph is not None else None,
+        "font_name": run.font.name if run is not None else None,
+        "font_size": run.font.size if run is not None else None,
+        "font_bold": run.font.bold if run is not None else None,
+        "font_italic": run.font.italic if run is not None else None,
+        "font_color_type": run.font.color.type if run is not None else None,
+        "font_color_rgb": None,
+        "font_theme_color": None,
+        "font_brightness": None,
+    }
+    if run is not None and run.font.color.type == MSO_COLOR_TYPE.RGB:
+        style["font_color_rgb"] = run.font.color.rgb
+    elif run is not None and run.font.color.type == MSO_COLOR_TYPE.SCHEME:
+        style["font_theme_color"] = run.font.color.theme_color
+        style["font_brightness"] = run.font.color.brightness
+
+    text_frame.clear()
+    paragraph = text_frame.paragraphs[0]
+    if style["alignment"] is not None:
+        paragraph.alignment = style["alignment"]
+    run = paragraph.add_run()
+    run.text = text
+    if style["font_name"] is not None:
+        run.font.name = style["font_name"]
+    if style["font_size"] is not None:
+        run.font.size = style["font_size"]
+    if style["font_bold"] is not None:
+        run.font.bold = style["font_bold"]
+    if style["font_italic"] is not None:
+        run.font.italic = style["font_italic"]
+    if style["font_color_rgb"] is not None:
+        run.font.color.rgb = style["font_color_rgb"]
+    elif style["font_theme_color"] is not None:
+        run.font.color.theme_color = style["font_theme_color"]
+        if style["font_brightness"] is not None:
+            run.font.color.brightness = style["font_brightness"]
+
+
+def set_shape_text_color(shape, hex_color: str) -> None:
+    if not shape.has_text_frame:
+        return
+    color = RGBColor.from_string(hex_color)
+    for paragraph in shape.text_frame.paragraphs:
+        for run in paragraph.runs:
+            run.font.color.rgb = color
 
 
 def build_ppt() -> None:
-    prs = Presentation(str(REFERENCE_PPT))
+    source_ppt = REFERENCE_PPT if REFERENCE_PPT.exists() else PPT_OUT
+    if not source_ppt.exists():
+        raise FileNotFoundError(f"No PPT template found at {REFERENCE_PPT} or {PPT_OUT}")
+    prs = Presentation(str(source_ppt))
 
     for slide_index, replacements in SLIDE_TEXT.items():
         slide = prs.slides[slide_index - 1]
@@ -322,6 +421,9 @@ def build_ppt() -> None:
             if shape is None:
                 raise KeyError(f"Slide {slide_index} missing shape id {shape_id}")
             set_shape_text(shape, text)
+            override_color = TEXT_COLOR_OVERRIDES.get(slide_index, {}).get(shape_id)
+            if override_color:
+                set_shape_text_color(shape, override_color)
 
     slide9 = prs.slides[8]
     image_shape = next(shape for shape in slide9.shapes if shape.shape_type == 13)
