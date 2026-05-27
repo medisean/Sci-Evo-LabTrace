@@ -1,0 +1,328 @@
+{
+  "case_id": "SELT-PROT-0005",
+  "dataset_version": "0.1.0",
+  "sci_evo_type": "scientific_evolution_trace",
+  "domain": [
+    "enzyme_engineering",
+    "directed_evolution",
+    "yeast_secretion",
+    "signal_peptide_design"
+  ],
+  "source": {
+    "title": "Design of an improved universal signal peptide based on the α-factor mating secretion signal for enzyme production in yeast",
+    "venue": "Cellular and Molecular Life Sciences",
+    "year": 2021,
+    "doi": "10.1007/s00018-021-03793-y",
+    "url": "https://doi.org/10.1007/s00018-021-03793-y",
+    "document_path": "https://link.springer.com/content/pdf/10.1007/s00018-021-03793-y.pdf",
+    "license_status": "explicit_open_license_cc_by",
+    "mineru_artifact": {
+      "markdown_path": "data/interim/mineru/SELT-PROT-0005/full.md",
+      "content_json_path": "data/interim/mineru/SELT-PROT-0005/content_list.json",
+      "images_dir": "data/interim/mineru/SELT-PROT-0005/images",
+      "tables_dir": ""
+    }
+  },
+  "initial_request": {
+    "target_name": "Universal alpha-factor preproleader for improved fungal enzyme secretion in Saccharomyces cerevisiae",
+    "input_data": "Native alpha-factor preproleader, evolved alpha9H2 leader mutations from prior laccase directed-evolution campaigns, PK2 and ApL laccase secretion assays, 96-well ABTS activity screens, and later validation across fungal oxidoreductases and hydrolases.",
+    "user_intent": "Infer which signal-peptide mutations genuinely improve enzyme secretion, separate beneficial mutations from neutral or deleterious baggage accumulated during directed evolution, and build a compact leader that works across multiple enzyme classes.",
+    "quantifiable_goal": "Design an optimized leader that matches or beats the evolved alpha9H2 benchmark for PK2 and ApL laccase secretion, generalizes to other fungal enzymes with multi-fold secretion gains, and yields a practical follow-up rule for target-specific optimization at positions 86 and 87.",
+    "evidence": [
+      {
+        "source_doc": "https://link.springer.com/content/pdf/10.1007/s00018-021-03793-y.pdf",
+        "page": 1,
+        "locator": "Abstract",
+        "support": "The abstract states that the study optimized the alpha-factor preproleader by bottom-up and top-down strategies and identified synergistic mutations in the final alphaOPT leader."
+      }
+    ]
+  },
+  "agent_trajectory": [
+    {
+      "step_index": 1,
+      "phase": "benchmark_and_problem_setup",
+      "thought": "[Background] Known / completed: The alpha-factor preproleader is widely used for yeast secretion, and an evolved alpha9H2 leader improves laccase production. [Gap] Missing / unresolved: A universal leader must avoid merely inheriting mutations that helped one enzyme but hurt or do nothing for others. [Decision] Benchmark alpha9H2 against the native leader with two model laccases, then use the result as the upper reference for systematic redesign.",
+      "action": "measurement",
+      "tool": {
+        "name": "Yeast secretion benchmark with ABTS laccase assay",
+        "version": "",
+        "category": "wet_lab_benchmarking"
+      },
+      "parameters": {
+        "host": "Saccharomyces cerevisiae",
+        "leaders_compared": [
+          "native alpha-factor preproleader",
+          "evolved alpha9H2 leader"
+        ],
+        "model_enzymes": [
+          "PK2 laccase",
+          "ApL laccase"
+        ],
+        "assay_format": "96-well secretion assay with ABTS readout"
+      },
+      "observation": "The evolved alpha9H2 leader produced roughly 2-fold higher PK2 activity and 12-fold higher ApL activity than the native leader, confirming it as a strong but potentially overfit benchmark.",
+      "outcome_type": "success",
+      "valid": true,
+      "references": [],
+      "evidence": [
+        {
+          "source_doc": "https://link.springer.com/content/pdf/10.1007/s00018-021-03793-y.pdf",
+          "page": 3,
+          "locator": "Initial alpha9H2 versus native benchmark",
+          "support": "The paper reports that alpha9H2 yielded about twofold higher PK2 activity and 12-fold higher ApL activity than the native leader in 96-well ABTS assays."
+        }
+      ]
+    },
+    {
+      "step_index": 2,
+      "phase": "bottom_up_single_mutation_scan",
+      "thought": "[Background] Known / completed: alpha9H2 is better than the native leader, but its mutation set mixes potentially beneficial, neutral, and harmful substitutions. [Gap] Missing / unresolved: Which individual mutations drive secretion gains across enzymes. [Decision] Add or remove 13 candidate mutations one at a time in the native-leader context and test both PK2 and ApL, so mutation effects can be compared before building combinations.",
+      "action": "wet_experiment",
+      "tool": {
+        "name": "Site-directed mutagenesis and 96-well activity screening",
+        "version": "",
+        "category": "wet_lab_mutational_scan"
+      },
+      "parameters": {
+        "candidate_mutations": 13,
+        "mutation_sources": [
+          "seven alpha9H2 mutations",
+          "two pPICZalpha-derived mutations",
+          "four literature or prior-evolution candidates"
+        ],
+        "replicates_per_variant": 10
+      },
+      "observation": "The single-mutation scan localized broadly useful effects near the pre-region, especially Aα9D and Aα20T, while revealing neutral or deleterious positions such as Qα32H, Fα48S, Sα58G, and Gα62R depending on enzyme context.",
+      "outcome_type": "success",
+      "valid": true,
+      "references": [],
+      "evidence": [
+        {
+          "source_doc": "https://link.springer.com/content/pdf/10.1007/s00018-021-03793-y.pdf",
+          "page": 4,
+          "locator": "Single-mutated alpha leader assay",
+          "support": "The paper states that 13 single-mutated leaders were fused to PK2 and ApL, screened in 96-well plates, and compared by normalized laccase activity with statistical testing."
+        },
+        {
+          "source_doc": "https://link.springer.com/content/pdf/10.1007/s00018-021-03793-y.pdf",
+          "page": 10,
+          "locator": "Discussion of beneficial single mutations",
+          "support": "The discussion identifies Aα9D and Aα20T as broadly beneficial mutations and notes that favorable effects were mostly located at or near the pre-region."
+        }
+      ]
+    },
+    {
+      "step_index": 3,
+      "phase": "combinatorial_epistasis_exploration",
+      "thought": "[Background] Known / completed: Several single mutations look beneficial, but secretion leaders are short regulatory peptides where mutation interactions can be strongly non-additive. [Gap] Missing / unresolved: Which combinations preserve synergy instead of collapsing expression. [Decision] Build targeted double and quadruple combinations, then use in vivo recombination over selected leaders to search a larger combination space under a PK2 laccase screen.",
+      "action": "wet_experiment",
+      "tool": {
+        "name": "Targeted combinatorial mutagenesis and in vivo recombination",
+        "version": "",
+        "category": "combinatorial_library_screening"
+      },
+      "parameters": {
+        "targeted_combinations": [
+          "Rα2S,Aα9D",
+          "Aα20T,Tα24S",
+          "Rα2S,Aα9D,Aα20T,Tα24S",
+          "Eα86G,Aα87T"
+        ],
+        "recombination_library_size": 1600,
+        "selection_model_enzyme": "PK2 laccase"
+      },
+      "observation": "The combinatorial screen exposed strong epistasis: some apparently good single mutations became detrimental together, while the best recombined clones converged on Aα9D and Aα9D,Aα20T leaders.",
+      "outcome_type": "success",
+      "valid": true,
+      "references": [],
+      "evidence": [
+        {
+          "source_doc": "https://link.springer.com/content/pdf/10.1007/s00018-021-03793-y.pdf",
+          "page": 4,
+          "locator": "Synergism and recombination screen",
+          "support": "The paper describes targeted double and quadruple leader mutants, then screening 1600 recombined clones; the five fittest clones carried Aα9D or Aα9D,Aα20T leaders."
+        }
+      ]
+    },
+    {
+      "step_index": 4,
+      "phase": "top_down_simplification",
+      "thought": "[Background] Known / completed: Bottom-up results point to Aα9D and Aα20T, but alpha9H2 still contains multiple inherited mutations. [Gap] Missing / unresolved: Whether some alpha9H2 mutations are passengers that reduce portability. [Decision] Start from alpha9H2 and revert suspected neutral or deleterious mutations to native residues, testing whether a simpler evolved leader keeps or improves secretion performance.",
+      "action": "wet_experiment",
+      "tool": {
+        "name": "Top-down reversion analysis of evolved leader",
+        "version": "",
+        "category": "trajectory_simplification"
+      },
+      "parameters": {
+        "parent_leader": "alpha9H2",
+        "reversions_tested": [
+          "Hα32Q",
+          "Sα48F",
+          "Gα58S",
+          "Rα62G"
+        ],
+        "goal": "remove neutral or deleterious accumulated mutations"
+      },
+      "observation": "Top-down simplification agreed with the bottom-up pathway: the optimized signal could be reduced to the Aα9D,Aα20T-centered design while keeping the baseline Lα42S and Dα83E changes present in the working native leader.",
+      "outcome_type": "success",
+      "valid": true,
+      "references": [],
+      "evidence": [
+        {
+          "source_doc": "https://link.springer.com/content/pdf/10.1007/s00018-021-03793-y.pdf",
+          "page": 5,
+          "locator": "Top-down design paragraph",
+          "support": "The paper states that the top-down approach removed possible deleterious or neutral mutations from alpha9H2 that might mask beneficial effects."
+        },
+        {
+          "source_doc": "https://link.springer.com/content/pdf/10.1007/s00018-021-03793-y.pdf",
+          "page": 6,
+          "locator": "Final leader comparison",
+          "support": "The paper reports comparison of final bottom-up and top-down leaders and selection of the Aα9D,Aα20T design as alphaOPT."
+        }
+      ]
+    },
+    {
+      "step_index": 5,
+      "phase": "cross_enzyme_generalization",
+      "thought": "[Background] Known / completed: The simplified alphaOPT leader works on the two model laccases, but the central claim is broad enzyme secretion. [Gap] Missing / unresolved: Whether the leader generalizes beyond the training-like laccase pair. [Decision] Test alphaOPT across additional fungal oxidoreductases and hydrolases under microtiter and flask conditions, comparing it to native and alpha9H2 leaders.",
+      "action": "wet_experiment",
+      "tool": {
+        "name": "Cross-enzyme yeast secretion validation",
+        "version": "",
+        "category": "generalization_testing"
+      },
+      "parameters": {
+        "validation_classes": [
+          "basidiomycete oxidoreductases",
+          "ascomycete hydrolases"
+        ],
+        "leaders_compared": [
+          "native alpha-factor leader",
+          "alpha9H2",
+          "alphaOPT"
+        ],
+        "formats": [
+          "96-well microtiter plates",
+          "flask production"
+        ]
+      },
+      "observation": "alphaOPT enhanced secretion for multiple fungal enzymes, often outperforming alpha9H2 and giving roughly 2- to 20-fold improvements over the native leader depending on the enzyme.",
+      "outcome_type": "success",
+      "valid": true,
+      "references": [],
+      "evidence": [
+        {
+          "source_doc": "https://link.springer.com/content/pdf/10.1007/s00018-021-03793-y.pdf",
+          "page": 7,
+          "locator": "Evaluation with other fungal enzymes",
+          "support": "The paper states that alphaOPT was evaluated with additional fungal oxidoreductases and hydrolases to test broad secretion performance."
+        },
+        {
+          "source_doc": "https://link.springer.com/content/pdf/10.1007/s00018-021-03793-y.pdf",
+          "page": 12,
+          "locator": "Generalization summary",
+          "support": "The paper reports that alphaOPT generally enhanced enzyme levels by roughly 2- to 20-fold over the native leader and outperformed alpha9H2 for most enzymes tested."
+        }
+      ]
+    },
+    {
+      "step_index": 6,
+      "phase": "target_specific_followup_rule",
+      "thought": "[Background] Known / completed: alphaOPT is a strong universal leader, but spacer residues 86 and 87 show enzyme-dependent effects. [Gap] Missing / unresolved: How to adapt the universal leader for a specific new target without restarting the full engineering campaign. [Decision] Propose and test combinatorial saturation mutagenesis at positions 86 and 87 in the alphaOPT context, using high-throughput secretion screening to tune the leader to the fused enzyme.",
+      "action": "wet_experiment",
+      "tool": {
+        "name": "Combinatorial saturation mutagenesis at alphaOPT positions 86 and 87",
+        "version": "",
+        "category": "target_specific_optimization"
+      },
+      "parameters": {
+        "hotspot_positions": [
+          86,
+          87
+        ],
+        "library_size_per_target": 1600,
+        "comparison_libraries": [
+          "CSM 86/87",
+          "N-glycosylation-control CSM libraries"
+        ]
+      },
+      "observation": "Positions 86 and 87 behaved as target-specific secretion hotspots: their saturation libraries produced more diverse and useful activity landscapes than control N-glycosylation libraries, yielding a practical tuning rule for future enzymes.",
+      "outcome_type": "success",
+      "valid": true,
+      "references": [],
+      "evidence": [
+        {
+          "source_doc": "https://link.springer.com/content/pdf/10.1007/s00018-021-03793-y.pdf",
+          "page": 8,
+          "locator": "CSM 86/87 rationale and results",
+          "support": "The paper describes randomizing positions 86 and 87 in alphaOPT, comparing the libraries with N-glycosylation controls, and identifying these positions as hotspots for enzyme-specific secretion tuning."
+        },
+        {
+          "source_doc": "https://link.springer.com/content/pdf/10.1007/s00018-021-03793-y.pdf",
+          "page": 13,
+          "locator": "Methods: CSM 86/87 libraries",
+          "support": "The methods report CSM 86/87 libraries with all 20 standard amino-acid substitutions and screening of 1600 clones per CSM 86/87 library."
+        }
+      ]
+    }
+  ],
+  "success_verification": {
+    "validation_technique": "Directed redesign was validated through 96-well yeast secretion assays, ABTS-based laccase activity readouts, targeted mutation and recombination screens, top-down evolved-leader reversion, cross-enzyme secretion testing, flask production, purification, deglycosylation, and target-specific CSM 86/87 screens.",
+    "metrics": {
+      "alpha9H2 PK2 benchmark gain": {
+        "value": "2",
+        "unit": "fold",
+        "interpretation": "The evolved alpha9H2 leader gave roughly twofold higher PK2 secretion activity than the native leader."
+      },
+      "alpha9H2 ApL benchmark gain": {
+        "value": "12",
+        "unit": "fold",
+        "interpretation": "The evolved alpha9H2 leader gave roughly 12-fold higher ApL secretion activity than the native leader."
+      },
+      "single mutations tested": {
+        "value": "13",
+        "unit": "mutations",
+        "interpretation": "The bottom-up scan tested 13 candidate leader mutations one at a time across two model laccases."
+      },
+      "recombination screen size": {
+        "value": "1600",
+        "unit": "clones",
+        "interpretation": "The in vivo recombination library screened 1600 PK2 clones and converged on Aα9D and Aα9D,Aα20T leaders."
+      },
+      "alphaOPT broad secretion gain": {
+        "value": "2-20",
+        "unit": "fold",
+        "interpretation": "Across additional fungal enzymes, alphaOPT generally improved secretion over the native leader by roughly 2- to 20-fold."
+      },
+      "CSM 86/87 screen size": {
+        "value": "1600",
+        "unit": "clones per library",
+        "interpretation": "Target-specific optimization at positions 86 and 87 used 1600-clone saturation libraries to tune secretion for individual fused enzymes."
+      }
+    },
+    "final_verdict": "The study is a useful Sci-Evo case because it reconstructs an engineering lineage rather than only reporting an endpoint: prior directed-evolution mutations are decomposed, tested singly and combinatorially, simplified from the evolved leader, validated across enzyme families, and converted into a reusable target-specific optimization rule.",
+    "evidence": [
+      {
+        "source_doc": "https://link.springer.com/content/pdf/10.1007/s00018-021-03793-y.pdf",
+        "page": 12,
+        "locator": "Conclusion",
+        "support": "The paper concludes that alphaOPT was obtained by a dual bottom-up and top-down design strategy and markedly enhances secretion of a range of fungal enzymes in yeast."
+      },
+      {
+        "source_doc": "https://link.springer.com/content/pdf/10.1007/s00018-021-03793-y.pdf",
+        "page": 13,
+        "locator": "Open Access statement",
+        "support": "The article states that it is licensed under Creative Commons Attribution 4.0 International License."
+      }
+    ]
+  },
+  "quality": {
+    "schema_version": "0.1.0",
+    "curation_level": "gold",
+    "evidence_coverage": 1.0,
+    "requires_license_review": false,
+    "notes": "基于 Springer CC-BY 开放论文人工整理；该 case 补足非 AI 的 directed-evolution 轨迹拆解、组合突变和跨酶泛化验证。"
+  }
+}

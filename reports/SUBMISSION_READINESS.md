@@ -2,10 +2,10 @@
 
 ## 总体状态
 
-- 是否完整：是
-- Gold case 数量：3
-- Case 总数：3
-- 评测任务数：37
+- 是否完整：否
+- Gold case 数量：5
+- Case 总数：5
+- 评测任务数：63
 - 已筛选 OA 候选数：25
 - Manifest 版本：0.1.0
 
@@ -20,8 +20,8 @@
 - evaluation_tasks_generated: 通过
 - docs_complete: 通过
 - source_license_risks_explicit: 通过
-- git_clean: 通过
+- git_clean: 未通过
 
 ## 阻塞项
 
-- 未发现关键缺口。
+- Git 工作区尚未清理。
