@@ -299,6 +299,30 @@ COPY_ITEMS = [
     ("reports/SUBMISSION_READINESS.md", "reports/SUBMISSION_READINESS.md"),
     ("reports/CASE_DEPTH_AUDIT.md", "reports/CASE_DEPTH_AUDIT.md"),
     ("reports/VETTED_SOURCE_QUEUE.md", "reports/VETTED_SOURCE_QUEUE.md"),
+    ("data/raw/pdfs/SELT-PROT-0002.pdf", "source_papers/SELT-PROT-0002.pdf"),
+    ("data/raw/pdfs/SELT-PROT-0003.pdf", "source_papers/SELT-PROT-0003.pdf"),
+    ("data/raw/pdfs/SELT-PROT-0004.pdf", "source_papers/SELT-PROT-0004.pdf"),
+    ("data/raw/pdfs/SELT-PROT-0005.pdf", "source_papers/SELT-PROT-0005.pdf"),
+    ("data/interim/mineru/SELT-PROT-0002/full.md", "mineru_artifacts/SELT-PROT-0002/full.md"),
+    ("data/interim/mineru/SELT-PROT-0002/content_list.json", "mineru_artifacts/SELT-PROT-0002/content_list.json"),
+    ("data/interim/mineru/SELT-PROT-0002/content_list_v2.json", "mineru_artifacts/SELT-PROT-0002/content_list_v2.json"),
+    ("data/interim/mineru/SELT-PROT-0002/layout.json", "mineru_artifacts/SELT-PROT-0002/layout.json"),
+    ("data/interim/mineru/SELT-PROT-0002/model.json", "mineru_artifacts/SELT-PROT-0002/model.json"),
+    ("data/interim/mineru/SELT-PROT-0003/full.md", "mineru_artifacts/SELT-PROT-0003/full.md"),
+    ("data/interim/mineru/SELT-PROT-0003/content_list.json", "mineru_artifacts/SELT-PROT-0003/content_list.json"),
+    ("data/interim/mineru/SELT-PROT-0003/content_list_v2.json", "mineru_artifacts/SELT-PROT-0003/content_list_v2.json"),
+    ("data/interim/mineru/SELT-PROT-0003/layout.json", "mineru_artifacts/SELT-PROT-0003/layout.json"),
+    ("data/interim/mineru/SELT-PROT-0003/model.json", "mineru_artifacts/SELT-PROT-0003/model.json"),
+    ("data/interim/mineru/SELT-PROT-0004/full.md", "mineru_artifacts/SELT-PROT-0004/full.md"),
+    ("data/interim/mineru/SELT-PROT-0004/content_list.json", "mineru_artifacts/SELT-PROT-0004/content_list.json"),
+    ("data/interim/mineru/SELT-PROT-0004/content_list_v2.json", "mineru_artifacts/SELT-PROT-0004/content_list_v2.json"),
+    ("data/interim/mineru/SELT-PROT-0004/layout.json", "mineru_artifacts/SELT-PROT-0004/layout.json"),
+    ("data/interim/mineru/SELT-PROT-0004/model.json", "mineru_artifacts/SELT-PROT-0004/model.json"),
+    ("data/interim/mineru/SELT-PROT-0005/full.md", "mineru_artifacts/SELT-PROT-0005/full.md"),
+    ("data/interim/mineru/SELT-PROT-0005/content_list.json", "mineru_artifacts/SELT-PROT-0005/content_list.json"),
+    ("data/interim/mineru/SELT-PROT-0005/content_list_v2.json", "mineru_artifacts/SELT-PROT-0005/content_list_v2.json"),
+    ("data/interim/mineru/SELT-PROT-0005/layout.json", "mineru_artifacts/SELT-PROT-0005/layout.json"),
+    ("data/interim/mineru/SELT-PROT-0005/model.json", "mineru_artifacts/SELT-PROT-0005/model.json"),
     ("data/curated/cases/SELT-PROT-0002.json", "data/curated/cases/SELT-PROT-0002.json"),
     ("data/curated/cases/SELT-PROT-0003.json", "data/curated/cases/SELT-PROT-0003.json"),
     ("data/curated/cases/SELT-PROT-0004.json", "data/curated/cases/SELT-PROT-0004.json"),
@@ -450,6 +474,49 @@ def copy_tree_items() -> None:
         dst.parent.mkdir(parents=True, exist_ok=True)
         shutil.copy2(src, dst)
 
+    (DELIVERABLES / "source_papers" / "README.md").write_text(
+        "\n".join(
+            [
+                "# Source Papers",
+                "",
+                "本目录包含 4 篇开放许可论文 PDF，用于评审复核数据来源。",
+                "",
+                "- `SELT-PROT-0002.pdf`: Nature Communications, DOI `10.1038/s41467-024-50698-y`, CC-BY。",
+                "- `SELT-PROT-0003.pdf`: Nature Communications, DOI `10.1038/s41467-020-18619-x`, CC-BY。",
+                "- `SELT-PROT-0004.pdf`: eLife, DOI `10.7554/eLife.102788.3`, CC-BY。",
+                "- `SELT-PROT-0005.pdf`: Cellular and Molecular Life Sciences, DOI `10.1007/s00018-021-03793-y`, CC-BY 4.0。",
+                "",
+                "说明：`SELT-PROT-0001` 来自赛事样例 PDF，数据集中保留结构化字段和证据引用；由于公开许可仍需复核，提交包不额外打包该全文 PDF。",
+                "",
+            ]
+        )
+        + "\n",
+        encoding="utf-8",
+    )
+
+    (DELIVERABLES / "mineru_artifacts" / "README.md").write_text(
+        "\n".join(
+            [
+                "# MinerU Artifacts",
+                "",
+                "本目录包含 4 篇开放许可论文的 MinerU 结构化解析产物，用于评审复核 evidence 字段与原文之间的对应关系。",
+                "",
+                "每个 case 子目录包含：",
+                "",
+                "- `full.md`: MinerU 转换后的 Markdown 文本。",
+                "- `content_list.json`: 页面与块级内容列表。",
+                "- `content_list_v2.json`: 结构化内容列表 v2。",
+                "- `layout.json`: 页面布局信息。",
+                "- `model.json`: 模型解析结果。",
+                "",
+                "不包含 API token、下载 zip、未确认许可的赛事样例全文解析产物或图片目录。",
+                "",
+            ]
+        )
+        + "\n",
+        encoding="utf-8",
+    )
+
     readme = DELIVERABLES / "README.md"
     readme.write_text(
         "\n".join(
@@ -462,6 +529,8 @@ def copy_tree_items() -> None:
                 "- `data/curated/` 与 `data/processed/`：curated case 源文件、gold 数据集、评测任务、manifest 和开放来源筛选结果。",
                 "- `docs/`：技术报告、数据集卡片、标注规范、材料清单和录屏讲稿。",
                 "- `reports/`：质量报告、Gold case 深度审计、MinerU 运行报告、完整性检查报告和来源筛选队列。",
+                "- `source_papers/`：4 篇开放许可论文 PDF。",
+                "- `mineru_artifacts/`：4 篇开放许可论文对应的 MinerU Markdown、content list、layout 和 model 产物。",
                 "- `schemas/`：Sci-Evo case schema。",
                 "- `scripts/`：构建、校验、评测任务生成、质量报告和完整性检查脚本。",
                 "",

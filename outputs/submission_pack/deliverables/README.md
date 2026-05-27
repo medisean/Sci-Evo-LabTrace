@@ -6,6 +6,8 @@
 - `data/curated/` 与 `data/processed/`：curated case 源文件、gold 数据集、评测任务、manifest 和开放来源筛选结果。
 - `docs/`：技术报告、数据集卡片、标注规范、材料清单和录屏讲稿。
 - `reports/`：质量报告、Gold case 深度审计、MinerU 运行报告、完整性检查报告和来源筛选队列。
+- `source_papers/`：4 篇开放许可论文 PDF。
+- `mineru_artifacts/`：4 篇开放许可论文对应的 MinerU Markdown、content list、layout 和 model 产物。
 - `schemas/`：Sci-Evo case schema。
 - `scripts/`：构建、校验、评测任务生成、质量报告和完整性检查脚本。
 
