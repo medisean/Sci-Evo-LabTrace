@@ -1,0 +1,270 @@
+{
+  "case_id": "SELT-PROT-0002",
+  "dataset_version": "0.1.0",
+  "sci_evo_type": "scientific_evolution_trace",
+  "domain": [
+    "protein_design",
+    "enzyme_engineering",
+    "machine_learning",
+    "biocatalysis"
+  ],
+  "source": {
+    "title": "Machine learning-guided co-optimization of fitness and diversity facilitates combinatorial library design in enzyme engineering",
+    "venue": "Nature Communications",
+    "year": 2024,
+    "doi": "10.1038/s41467-024-50698-y",
+    "url": "https://doi.org/10.1038/s41467-024-50698-y",
+    "document_path": "https://www.nature.com/articles/s41467-024-50698-y.pdf",
+    "license_status": "explicit_open_license_cc_by",
+    "mineru_artifact": {
+      "markdown_path": "data/interim/mineru/SELT-PROT-0002/full.md",
+      "content_json_path": "data/interim/mineru/SELT-PROT-0002/content_list.json",
+      "images_dir": "data/interim/mineru/extracted-SELT-PROT-0002/images",
+      "tables_dir": ""
+    }
+  },
+  "initial_request": {
+    "target_name": "Generalist Rma cytochrome c biocatalysts for C-B and C-Si bond formation",
+    "input_data": "Crystal structure of Rma cytochrome c (PDB 6CUK), six targeted active-site/front-loop residues (75, 99, 100, 101, 102, 103), prior directed-evolution knowledge for borylation and silylation, and MODIFY Pareto library design algorithm.",
+    "user_intent": "Engineer cytochrome c variants that can catalyze both carbon-boron and carbon-silicon bond formation with strong activity and stereocontrol, while exploring a broader and more diverse sequence space than standard saturation libraries.",
+    "quantifiable_goal": "Produce a combinatorial library whose screened variants outperform an NNK control in both reactions, including at least about 2x higher average yield and improved enantiomeric ratio, while uncovering novel high-performing generalist variants.",
+    "evidence": [
+      {
+        "source_doc": "https://www.nature.com/articles/s41467-024-50698-y.pdf",
+        "page": 5,
+        "locator": "Rma cytochrome c application setup",
+        "support": "The paper states the aim of engineering cytochrome c variants that catalyze both C-B and C-Si bond formation with excellent efficiency and stereocontrol."
+      }
+    ]
+  },
+  "agent_trajectory": [
+    {
+      "step_index": 1,
+      "phase": "target_residue_selection",
+      "thought": "[Background] Known / completed: Existing Rma cytochrome c variants can catalyze new-to-nature carbene-transfer reactions, but the best evolved enzymes are reaction-specific. [Gap] Missing / unresolved: A compact library that targets the most relevant positions while preserving enough diversity to discover generalist catalysts. [Decision] Use the Rma cyt c crystal structure to define six targeted residues around the active site and front loop for combinatorial optimization, expecting these hotspots to control both activity and stereoselectivity.",
+      "action": "analysis",
+      "tool": {
+        "name": "Crystal structure-guided hotspot selection",
+        "version": "",
+        "category": "structural_analysis"
+      },
+      "parameters": {
+        "template_structure": "Rma cytochrome c, PDB 6CUK",
+        "targeted_residues": [
+          75,
+          99,
+          100,
+          101,
+          102,
+          103
+        ]
+      },
+      "observation": "The study fixed on six active-site/front-loop residues as the designable positions for library construction.",
+      "outcome_type": "success",
+      "valid": true,
+      "references": [],
+      "evidence": [
+        {
+          "source_doc": "https://www.nature.com/articles/s41467-024-50698-y.pdf",
+          "page": 6,
+          "locator": "Figure 5 caption",
+          "support": "The figure caption identifies residues 75, 99, 100, 101, 102, and 103 as the six targeted residues used to create the combinatorial libraries."
+        }
+      ]
+    },
+    {
+      "step_index": 2,
+      "phase": "library_design",
+      "thought": "[Background] Known / completed: Six hotspots were selected for diversification. [Gap] Missing / unresolved: Standard degenerate libraries either waste budget on nonfunctional variants or collapse onto a narrow region of sequence space. [Decision] Apply the MODIFY Pareto optimization algorithm, with optional residue-level priors, to co-optimize predicted fitness and sequence diversity when constructing the starting library.",
+      "action": "dry_experiment",
+      "tool": {
+        "name": "MODIFY",
+        "version": "",
+        "category": "machine_learning_library_design"
+      },
+      "parameters": {
+        "optimization_objectives": [
+          "predicted_fitness",
+          "sequence_diversity"
+        ],
+        "library_parent": "Rma cytochrome c",
+        "residue_level_control": true
+      },
+      "observation": "MODIFY generated a Pareto-style library design intended to populate multiple high-fitness regions rather than a single narrow optimum.",
+      "outcome_type": "success",
+      "valid": true,
+      "references": [],
+      "evidence": [
+        {
+          "source_doc": "https://www.nature.com/articles/s41467-024-50698-y.pdf",
+          "page": 4,
+          "locator": "MODIFY library discussion",
+          "support": "The paper describes MODIFY as balancing fitness and diversity and allowing residue-level diversity control with prior knowledge."
+        },
+        {
+          "source_doc": "https://www.nature.com/articles/s41467-024-50698-y.pdf",
+          "page": 8,
+          "locator": "Methods summary of MODIFY",
+          "support": "The methods section states that MODIFY designs combinatorial libraries with optimized sequence fitness and diversity over selected residues."
+        }
+      ]
+    },
+    {
+      "step_index": 3,
+      "phase": "experimental_screening",
+      "thought": "[Background] Known / completed: A MODIFY-informed library has been designed. [Gap] Missing / unresolved: Whether this library actually yields better catalysts than a standard NNK control in both reaction classes. [Decision] Randomly sample and screen 160 clones from the MODIFY library in both C-B and C-Si bond-forming reactions, quantifying yield and enantiomeric ratio by chiral HPLC.",
+      "action": "wet_experiment",
+      "tool": {
+        "name": "Whole-cell/cell-lysate screening with chiral HPLC",
+        "version": "",
+        "category": "wet_lab_screening"
+      },
+      "parameters": {
+        "screened_clones": 160,
+        "assays": [
+          "C-B bond formation",
+          "C-Si bond formation"
+        ],
+        "measurement": [
+          "yield",
+          "enantiomeric_ratio"
+        ]
+      },
+      "observation": "Across both assays, the MODIFY library outperformed the NNK control, indicating that the designed library was enriched for productive catalysts.",
+      "outcome_type": "success",
+      "valid": true,
+      "references": [],
+      "evidence": [
+        {
+          "source_doc": "https://www.nature.com/articles/s41467-024-50698-y.pdf",
+          "page": 5,
+          "locator": "Rma cytochrome c screening paragraph",
+          "support": "The paper reports random selection of 160 clones, dual screening in C-B and C-Si reactions, and chiral HPLC measurement of yield and enantiomeric ratio."
+        }
+      ]
+    },
+    {
+      "step_index": 4,
+      "phase": "hit_identification",
+      "thought": "[Background] Known / completed: MODIFY screening enriched for productive variants. [Gap] Missing / unresolved: Which variants best combine novelty, catalytic activity, and stereocontrol across both transformations. [Decision] Rank the screened variants by reaction performance and compare them to previously evolved RDT and TDE baselines, expecting novel hits rather than simple rediscovery of known solutions.",
+      "action": "analysis",
+      "tool": {
+        "name": "Variant ranking and baseline comparison",
+        "version": "",
+        "category": "result_analysis"
+      },
+      "parameters": {
+        "comparison_baselines": [
+          "RDT",
+          "TDE"
+        ],
+        "top_variant_focus": [
+          "MLYPPT",
+          "SPIPAM",
+          "other top C-B/C-Si hits"
+        ]
+      },
+      "observation": "The library yielded strong C-B and C-Si catalysts, including novel variants six mutations away from the previously evolved RDT and TDE enzymes; MLYPPT emerged as a particularly important generalist hit.",
+      "outcome_type": "success",
+      "valid": true,
+      "references": [],
+      "evidence": [
+        {
+          "source_doc": "https://www.nature.com/articles/s41467-024-50698-y.pdf",
+          "page": 5,
+          "locator": "Top-variant discussion",
+          "support": "The paper states that the best-performing borylation and silylation variants are six mutations away from previously evolved RDT and TDE variants."
+        },
+        {
+          "source_doc": "https://www.nature.com/articles/s41467-024-50698-y.pdf",
+          "page": 7,
+          "locator": "Discussion summary",
+          "support": "The paper states that MODIFY produced the generalist MLYPPT variant with C-B and C-Si performance superior or comparable to experimentally evolved enzymes."
+        }
+      ]
+    },
+    {
+      "step_index": 5,
+      "phase": "mechanistic_interpretation",
+      "thought": "[Background] Known / completed: Novel high-performing variants have been identified, including double-proline front-loop mutants. [Gap] Missing / unresolved: Why these variants can support two different carbene-transfer reactions. [Decision] Run molecular dynamics analysis on top MODIFY variants to test whether front-loop conformational changes and flexibility explain reaction generality.",
+      "action": "simulation",
+      "tool": {
+        "name": "Molecular dynamics simulation",
+        "version": "",
+        "category": "mechanistic_modeling"
+      },
+      "parameters": {
+        "focus_region": "front loop residues 99-103",
+        "variants_of_interest": [
+          "MLYPPT",
+          "SPIPAM"
+        ]
+      },
+      "observation": "MD showed substantial front-loop conformational and dynamic changes, supporting the idea that increased loop flexibility helps generalist variants accommodate both substrates.",
+      "outcome_type": "success",
+      "valid": true,
+      "references": [],
+      "evidence": [
+        {
+          "source_doc": "https://www.nature.com/articles/s41467-024-50698-y.pdf",
+          "page": 6,
+          "locator": "MD simulation section",
+          "support": "The paper reports significant front-loop conformational changes in MODIFY variants and links improved loop flexibility of MLYPPT to generality across both reactions."
+        },
+        {
+          "source_doc": "https://www.nature.com/articles/s41467-024-50698-y.pdf",
+          "page": 5,
+          "locator": "Double-proline mutant results",
+          "support": "The paper identifies functional double-proline mutants including MLYPPT and SPIPAM with excellent catalytic activity and enantioselectivity."
+        }
+      ]
+    }
+  ],
+  "success_verification": {
+    "validation_technique": "Whole-cell and cell-free biocatalysis assays for C-B and C-Si bond formation, followed by chiral HPLC quantification of yield and enantiomeric ratio, plus MD-based structural interpretation of top hits.",
+    "metrics": {
+      "C-B average yield improvement": {
+        "value": "2.2",
+        "unit": "fold",
+        "interpretation": "The MODIFY library delivered a 2.2-fold higher average yield than the NNK control in carbon-boron bond formation."
+      },
+      "C-B average enantiomeric ratio improvement": {
+        "value": "4.0",
+        "unit": "fold",
+        "interpretation": "The MODIFY library improved average enantiomeric ratio fourfold in carbon-boron bond formation."
+      },
+      "C-Si average yield improvement": {
+        "value": "1.9",
+        "unit": "fold",
+        "interpretation": "The MODIFY library delivered a 1.9-fold higher average yield than the NNK control in carbon-silicon bond formation."
+      },
+      "C-Si average enantiomeric ratio improvement": {
+        "value": "1.3",
+        "unit": "fold",
+        "interpretation": "The MODIFY library improved average enantiomeric ratio 1.3-fold in carbon-silicon bond formation."
+      }
+    },
+    "final_verdict": "The study successfully used MODIFY to design a structurally informed, diversity-aware combinatorial library that produced novel and generalist Rma cytochrome c variants for both C-B and C-Si bond formation, outperforming a standard NNK library on key yield and stereocontrol metrics.",
+    "evidence": [
+      {
+        "source_doc": "https://www.nature.com/articles/s41467-024-50698-y.pdf",
+        "page": 5,
+        "locator": "Biotransformation result summary",
+        "support": "The paper reports 2.2-fold and 1.9-fold average yield gains and improved enantiomeric ratios relative to NNK for C-B and C-Si reactions."
+      },
+      {
+        "source_doc": "https://www.nature.com/articles/s41467-024-50698-y.pdf",
+        "page": 7,
+        "locator": "Discussion conclusion",
+        "support": "The paper concludes that MODIFY enabled a generalist MLYPPT variant with performance superior or comparable to experimentally evolved biocatalysts."
+      }
+    ]
+  },
+  "quality": {
+    "schema_version": "0.1.0",
+    "curation_level": "gold",
+    "evidence_coverage": 1.0,
+    "requires_license_review": false,
+    "notes": "基于 Nature Communications 的 CC-BY 开放论文人工整理，并保留页面级证据指针。"
+  }
+}

@@ -14,7 +14,7 @@
 
 ## 加分项
 
-- [ ] GitHub 仓库链接。
+- [x] GitHub 仓库链接。
 - [ ] OpenDataLab 数据集链接。
 - [ ] PPT。
 - [x] 3-5 分钟录屏。
@@ -24,16 +24,18 @@
 - [x] 简单 benchmark/evaluation tasks。
 - [x] 完整性检查：`reports/SUBMISSION_READINESS.md`。
 - [x] 开放来源筛选队列：`reports/VETTED_SOURCE_QUEUE.md`。
+- [x] 标注规范：`docs/ANNOTATION_GUIDELINES.md`。
+- [x] Gold case 深度审计：`reports/CASE_DEPTH_AUDIT.md`。
 
 ## 截止前最终检查
 
 - [x] `python3 scripts/build_dataset.py` 成功。
 - [x] `python3 scripts/validate_dataset.py data/processed/scievo_gold.jsonl` 成功。
 - [x] `python3 scripts/build_eval_tasks.py` 成功。
-- [ ] `python3 scripts/vet_candidate_sources.py` 成功。
-- [ ] `python3 scripts/check_submission_readiness.py` 仅在关键材料完整时通过。
-- [ ] README 中能讲清楚数据集用途。
-- [ ] 技术报告中能对应五个评分维度。
-- [ ] 不提交 `mineru-api-token.txt`。
-- [ ] 不发布未确认许可的全文或图片资源。
-- [x] 至少 3 条完整 gold case，且每条有证据与许可状态。
+- [x] `python3 scripts/vet_candidate_sources.py` 成功。
+- [x] `python3 scripts/check_submission_readiness.py` 仅在关键材料完整时通过。
+- [x] README 中能讲清楚数据集用途。
+- [x] 技术报告中能对应五个评分维度。
+- [x] 不提交 `mineru-api-token.txt`。
+- [x] 不发布未确认许可的全文或图片资源。
+- [x] 至少 3 条完整 gold case，当前已达到 5 条，且每条有证据与许可状态。
