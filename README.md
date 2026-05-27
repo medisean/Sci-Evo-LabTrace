@@ -45,12 +45,12 @@ python3 scripts/check_submission_readiness.py
 
 ## MinerU 使用
 
-样例 PDF 已通过 MinerU API 完成解析。本地解析产物包括 Markdown、content list JSON、layout JSON、model JSON、图片和下载 zip。出于许可合规考虑，这些全量解析产物只保留在本地，不放入公开 GitHub 仓库；公开仓库保留 MinerU 运行报告和可复现脚本。
+3 条 gold case 对应 PDF 均已通过 MinerU API 完成解析。本地解析产物包括 Markdown、content list JSON、layout JSON、model JSON、图片和下载 zip。出于许可合规考虑，这些全量解析产物只保留在本地，不放入公开 GitHub 仓库；公开仓库保留 MinerU 运行报告和可复现脚本。
 
 本地重新解析命令：
 
 ```bash
-python3 scripts/mineru_parse.py Sci-Evo-Sample.pdf --output-dir data/interim/mineru
+python3 scripts/mineru_parse.py Sci-Evo-Sample.pdf data/raw/pdfs/SELT-PROT-0002.pdf data/raw/pdfs/SELT-PROT-0003.pdf --output-dir data/interim/mineru
 ```
 
 ## 扩展流程
@@ -66,9 +66,10 @@ python3 scripts/collect_openalex_candidates.py --limit 25
 ## 当前状态
 
 - 数据构建与校验流程已就绪，当前生成 3 条 gold case 和 37 条评测任务。
-- 已记录 MinerU API 使用过程；赛事样例论文有本地解析产物。
+- 已记录 MinerU API 使用过程；3 条 gold case 均有本地解析产物。
 - 2 条新增 gold case 来自明确 CC-BY 的开放论文。
 - 技术报告、材料清单、质量报告、录屏讲稿和完整性检查报告均已准备。
+- 已补充逐 case 深度审计与标注规范，用于说明 gold case 的质量控制口径。
 - 当前主要工作是最终材料整理，以及按需继续扩充更多开放许可案例。
 
 ## 许可说明

@@ -15,7 +15,13 @@
     "doi": "10.1038/s41467-024-50698-y",
     "url": "https://doi.org/10.1038/s41467-024-50698-y",
     "document_path": "https://www.nature.com/articles/s41467-024-50698-y.pdf",
-    "license_status": "explicit_open_license_cc_by"
+    "license_status": "explicit_open_license_cc_by",
+    "mineru_artifact": {
+      "markdown_path": "data/interim/mineru/SELT-PROT-0002/full.md",
+      "content_json_path": "data/interim/mineru/SELT-PROT-0002/content_list.json",
+      "images_dir": "data/interim/mineru/extracted-SELT-PROT-0002/images",
+      "tables_dir": ""
+    }
   },
   "initial_request": {
     "target_name": "Generalist Rma cytochrome c biocatalysts for C-B and C-Si bond formation",

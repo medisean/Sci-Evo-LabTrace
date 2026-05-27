@@ -43,4 +43,6 @@ JSON Lines。每一行是一条完整科学演化 case。
 
 - 来源筛选队列：`reports/VETTED_SOURCE_QUEUE.md`
 - 完整性检查报告：`reports/SUBMISSION_READINESS.md`
+- 标注规范：`docs/ANNOTATION_GUIDELINES.md`
+- 深度审计：`reports/CASE_DEPTH_AUDIT.md`
 - 下一步安全操作：只下载许可信息明确允许本地处理的 PDF，并通过 MinerU 解析后再人工复核成 gold case。

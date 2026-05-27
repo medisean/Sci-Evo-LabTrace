@@ -80,6 +80,8 @@ python3 scripts/make_quality_report.py
 
 - `scripts/vet_candidate_sources.py`：把 OpenAlex 候选元数据转换为“可安全本地处理 / 需人工复核 / 暂缓处理”的来源队列，避免在许可不清晰时直接抓取全文。
 - `scripts/check_submission_readiness.py`：统一检查 gold case 数量、评测任务、质量报告、MinerU 说明、关键文档和 Git 工作区状态，并生成 `reports/SUBMISSION_READINESS.md`。
+- `docs/ANNOTATION_GUIDELINES.md`：定义 gold case 标注口径、证据规范与质量分级。
+- `reports/CASE_DEPTH_AUDIT.md`：逐条审计当前 gold case 的深度、闭环结构和风险。
 
 ## 7. 应用场景
 
@@ -104,6 +106,8 @@ python3 scripts/make_quality_report.py
 - 1 个开放论文候选收集脚本。
 - 1 个开放来源许可筛选脚本。
 - 1 个完整性检查脚本。
+- 1 份标注规范。
+- 1 份 gold case 深度审计报告。
 - README、技术报告和录屏脚本骨架。
 
 ## 9. 与评分维度的对应
@@ -116,7 +120,7 @@ python3 scripts/make_quality_report.py
 
 ## 10. 当前阻塞与下一步
 
-当前版本已经达到“至少 3 条完整 gold case”的基础完整度门槛。剩余工作主要是材料整理而不是数据结构本身。下一步优先顺序是：
+当前版本已经达到“至少 3 条完整 gold case”的基础完整度门槛，并且 3 条 case 均已补齐本地 MinerU 解析记录。剩余工作主要是材料整理而不是数据结构本身。下一步优先顺序是：
 
 1. 在最终整理前用 `git status --short` 确认工作区干净，并保留明确提交记录。
 2. 如需进一步冲击更高排名，从 `reports/VETTED_SOURCE_QUEUE.md` 继续扩展更多 `permitted_for_local_processing` 的开放论文。

@@ -5,7 +5,7 @@
   "gold_case_count": 3,
   "silver_case_count": 0,
   "license_review_required_count": 1,
-  "cases_with_mineru_artifacts": 1,
+  "cases_with_mineru_artifacts": 3,
   "processed_file": "data/processed/scievo_gold.jsonl",
   "eval_tasks_file": "data/processed/scievo_eval_tasks.jsonl",
   "candidate_sources_file": "data/raw/candidate_papers.jsonl",

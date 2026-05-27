@@ -2,7 +2,7 @@
 
 ## 概要
 
-- 输入文件：`Sci-Evo-Sample.pdf`
+- 输入文件：`Sci-Evo-Sample.pdf`、`SELT-PROT-0002.pdf`、`SELT-PROT-0003.pdf`
 - API 模式：MinerU batch API
 - 模型版本：`vlm`
 - 公式解析：已开启
@@ -26,6 +26,16 @@
 - `Sci-Evo-Sample/content_list_v2.json`
 - `Sci-Evo-Sample/layout.json`
 - `Sci-Evo-Sample/model.json`
+- `SELT-PROT-0002/full.md`
+- `SELT-PROT-0002/content_list.json`
+- `SELT-PROT-0002/content_list_v2.json`
+- `SELT-PROT-0002/layout.json`
+- `SELT-PROT-0002/model.json`
+- `SELT-PROT-0003/full.md`
+- `SELT-PROT-0003/content_list.json`
+- `SELT-PROT-0003/content_list_v2.json`
+- `SELT-PROT-0003/layout.json`
+- `SELT-PROT-0003/model.json`
 
 ## 公开发布说明
 

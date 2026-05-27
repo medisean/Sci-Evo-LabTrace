@@ -15,7 +15,13 @@
     "doi": "10.1038/s41467-020-18619-x",
     "url": "https://doi.org/10.1038/s41467-020-18619-x",
     "document_path": "https://www.nature.com/articles/s41467-020-18619-x.pdf",
-    "license_status": "explicit_open_license_cc_by"
+    "license_status": "explicit_open_license_cc_by",
+    "mineru_artifact": {
+      "markdown_path": "data/interim/mineru/SELT-PROT-0003/full.md",
+      "content_json_path": "data/interim/mineru/SELT-PROT-0003/content_list.json",
+      "images_dir": "data/interim/mineru/extracted-SELT-PROT-0003/images",
+      "tables_dir": ""
+    }
   },
   "initial_request": {
     "target_name": "HG4 Kemp eliminase redesigned from an HG3/HG3.17 evolutionary trajectory",
